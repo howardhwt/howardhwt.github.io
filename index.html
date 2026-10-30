@@ -53,7 +53,7 @@
     <p class="open reveal">Open to Founding AE and GTM Engineer roles at early stage B2B and AI companies.</p>
 
     <nav class="links reveal" aria-label="Contact">
-      <a class="primary" href="mailto:howard.tam.hw@gmail.com">Email me</a>
+      <a class="primary" id="mail" href="https://www.linkedin.com/in/howardhwt" data-u="wh.mat.drawoh" data-d="moc.liamg">Email me</a>
       <a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a>
       <a href="https://github.com/howardhwt">GitHub</a>
       <a href="https://github.com/howardhwt/outbound-gates">outbound-gates</a>
@@ -66,6 +66,9 @@
       entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
     els.forEach((el) => io.observe(el));
+    const m = document.getElementById('mail');
+    const rev = (v) => v.split('').reverse().join('');
+    m.href = 'mailto:' + rev(m.dataset.u) + '@' + rev(m.dataset.d);
   </script>
 </body>
 </html>
