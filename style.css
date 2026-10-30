@@ -263,3 +263,9 @@ a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 .flow li.human { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 .note { margin-top: 40px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 20px; }
+
+.side ul { list-style: none; max-width: 65ch; display: grid; gap: 16px; }
+.side li { color: #C8C8C8; text-wrap: pretty; padding-left: 16px; position: relative; }
+.side li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 2px; background: var(--muted); }
+.side strong { color: var(--text); font-weight: 500; }
+.side a { color: var(--text); text-underline-offset: 4px; }
