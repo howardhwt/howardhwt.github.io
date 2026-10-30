@@ -52,6 +52,32 @@
 
     <p class="open reveal">Open to Founding AE and GTM Engineer roles at early stage B2B and AI companies.</p>
 
+    <section class="contact reveal" aria-labelledby="contact-h">
+      <h2 id="contact-h">Send a message</h2>
+      <form id="contact" novalidate>
+        <input type="hidden" name="access_key" value="160a0a28-0e5e-43ad-8369-a830430b0156">
+        <input type="hidden" name="subject" value="New message from howardhwt.github.io">
+        <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+          <p class="err" id="e-name"></p>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <p class="err" id="e-email"></p>
+        </div>
+        <div class="field">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" name="message" rows="5" required></textarea>
+          <p class="err" id="e-msg"></p>
+        </div>
+        <button type="submit">Send message</button>
+        <p class="status" id="f-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
     <nav class="links reveal" aria-label="Contact">
       <a class="primary" id="mail" href="https://www.linkedin.com/in/howardhwt" data-u="wh.mat.drawoh" data-d="moc.liamg">Email me</a>
       <a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a>
@@ -69,6 +95,41 @@
     const m = document.getElementById('mail');
     const rev = (v) => v.split('').reverse().join('');
     m.href = 'mailto:' + rev(m.dataset.u) + '@' + rev(m.dataset.d);
+    const f = document.getElementById('contact');
+    const status = document.getElementById('f-status');
+    const checks = [
+      ['f-name', 'e-name', (v) => v.trim() ? '' : 'Add your name.'],
+      ['f-email', 'e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Add a valid email so I can reply.'],
+      ['f-msg', 'e-msg', (v) => v.trim().length >= 10 ? '' : 'Write at least a sentence.'],
+    ];
+    f.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      let ok = true;
+      checks.forEach(([id, eid, test]) => {
+        const el = document.getElementById(id); const msg = test(el.value);
+        document.getElementById(eid).textContent = msg;
+        el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+        if (msg && ok) { el.focus(); ok = false; }
+      });
+      if (!ok) return;
+      const btn = f.querySelector('button');
+      btn.disabled = true; btn.textContent = 'Sending…'; status.textContent = '';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(f))),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        f.reset();
+        status.textContent = "Message sent. I'll reply within two business days.";
+      } catch {
+        status.textContent = "Message didn't send. Try again, or reach me on LinkedIn.";
+      } finally {
+        btn.disabled = false; btn.textContent = 'Send message';
+      }
+    });
   </script>
 </body>
 </html>

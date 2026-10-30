@@ -179,3 +179,39 @@ a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 @media (scripting: none) {
   .reveal { opacity: 1; transform: none; }
 }
+
+.contact form { display: grid; gap: 16px; max-width: 560px; }
+.field { display: grid; gap: 8px; }
+.field label { font-size: 14px; line-height: 20px; font-weight: 500; }
+.field input, .field textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: border-color 300ms var(--ease);
+}
+.field textarea { resize: vertical; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+.field [aria-invalid="true"] { border-color: #9B9B9B; }
+.err { font-size: 14px; line-height: 20px; color: var(--text); min-height: 0; }
+.err:empty { display: none; }
+.trap { position: absolute; left: -9999px; }
+.contact button {
+  justify-self: start;
+  font: inherit;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 300ms var(--ease), transform 500ms var(--ease);
+}
+.contact button:hover { background: #FFFFFF; }
+.contact button:active { transform: scale(0.98); }
+.contact button:disabled { opacity: 0.6; cursor: progress; }
+.contact button:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+.status { font-size: 14px; line-height: 20px; color: var(--muted); }
