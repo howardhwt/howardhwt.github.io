@@ -23,7 +23,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <main id="main" class="wrap">
-    <header class="intro reveal">
+    <header class="intro hero">
       <p class="eyebrow">Howard Tam · Toronto</p>
       <h1>I sell, and I build the systems I sell with.</h1>
       <p class="lede">
@@ -107,11 +107,6 @@
   </main>
   <footer class="wrap foot">© 2026 Howard Tam</footer>
   <script>
-    const els = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    els.forEach((el) => io.observe(el));
     const m = document.getElementById('mail');
     const rev = (v) => v.split('').reverse().join('');
     m.href = 'mailto:' + rev(m.dataset.u) + '@' + rev(m.dataset.d);
@@ -151,5 +146,7 @@
       }
     });
   </script>
+  <script src="/motion.js" defer></script>
+  <script data-goatcounter="https://howardhwt.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

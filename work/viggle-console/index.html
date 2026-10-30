@@ -25,13 +25,13 @@
   <main id="main" class="wrap case">
     <nav class="back" aria-label="Breadcrumb"><a href="/">Howard Tam</a></nav>
 
-    <header>
+    <header class="hero">
       <p class="eyebrow">Case study · Viggle · Mar to Oct 2026</p>
       <h1>Viggle Console: a sales demo tool that became an MCP server</h1>
       <p class="lede">I built a console so prospects and colleagues could see the API work before writing code. Then I put an MCP server on it so Claude could run paid video batches without overspending.</p>
     </header>
 
-    <section class="facts" aria-label="Results">
+    <section class="facts reveal" aria-label="Results">
       <dl>
         <div><dt>6</dt><dd>colleagues use it to test the API</dd></div>
         <div><dt>5</dt><dd>API products in one screen, each call shown as curl, JavaScript and Python</dd></div>
@@ -40,7 +40,7 @@
       </dl>
     </section>
 
-    <article class="prose">
+    <article class="prose reveal">
       <h2>The problem</h2>
       <p>Selling an API means the buyer has to see a call work before anyone writes code. Docs and curl examples were not enough for a live demo, and colleagues outside engineering had no way to try the product themselves.</p>
 
@@ -50,6 +50,20 @@
       <h2>The MCP server</h2>
       <p>In October I added a stateless MCP endpoint, one Vercel function, that lets Claude submit a shot list, poll it and collect the clips. It reuses the console's API client and price estimator, so the console and Claude always show the same estimate.</p>
       <p>Most of the work went into making sure an agent cannot spend money by accident:</p>
+      <figure class="term" aria-label="Illustration of the batch flow">
+        <div class="run">
+          <p class="ln"><span class="cmd">submit_batch</span> 6 shots, 7 s each</p>
+          <p class="ln res">estimate: 42 credits · draft held for 1 hour</p>
+          <p class="ln"><span class="cmd">submit_batch</span> confirm_credits: 42</p>
+          <p class="ln res">submitted <span class="shots"><i class="shot"></i><i class="shot"></i><i class="shot"></i><i class="shot"></i><i class="shot"></i><i class="shot"></i></span></p>
+        </div>
+        <div class="run" hidden>
+          <p class="ln"><span class="cmd">submit_batch</span> 12 shots, 15 s each</p>
+          <p class="ln res refuse">refused: estimate 180 credits is over the 150 credit cap</p>
+          <p class="ln res">nothing submitted, nothing billed</p>
+        </div>
+        <figcaption>Illustration of the tool flow. Not real batch data.</figcaption>
+      </figure>
       <ul>
         <li>Submitting takes two steps. The first prices the batch and stores a draft. The second sends it only if the caller repeats the exact credit figure.</li>
         <li>Batches estimated above 150 credits are refused. Each shot gets at most 4 attempts.</li>
@@ -69,5 +83,7 @@
     </nav>
   </main>
   <footer class="wrap foot">© 2026 Howard Tam</footer>
+  <script src="/motion.js" defer></script>
+  <script data-goatcounter="https://howardhwt.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
