@@ -117,8 +117,8 @@
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(f))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(f),
         });
         const data = await res.json();
         if (!data.success) throw new Error(data.message);
