@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic outbound that won't send anything untrue · Howard Tam</title>
+  <meta name="description" content="Case study: four scheduled agents on Claude, HubSpot, Apollo and Clay, and the gates I built after a false claim slipped into my outreach. 400+ companies, 15% human reply rate on the newest API line.">
+  <meta property="og:title" content="Agentic outbound that won't send anything untrue">
+  <meta property="og:description" content="Four scheduled agents, a human send step, and the gates I built after a false claim slipped through.">
+  <meta property="og:url" content="https://howardhwt.github.io/work/agentic-outbound/">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://howardhwt.github.io/work/agentic-outbound/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main" class="wrap case">
+    <nav class="back" aria-label="Breadcrumb"><a href="/">Howard Tam</a></nav>
+
+    <header>
+      <p class="eyebrow">Case study · Viggle · Jul to Oct 2026</p>
+      <h1>Agentic outbound that won't send anything untrue</h1>
+      <p class="lede">Four scheduled agents research, rank and draft. Two gates check every draft against the facts and the CRM. A person sends every email.</p>
+    </header>
+
+    <section class="facts" aria-label="Results">
+      <dl>
+        <div><dt>400+</dt><dd>companies cold emailed, Jul to Oct 2026</dd></div>
+        <div><dt>15%</dt><dd>of companies on the newest API line replied, from a person</dd></div>
+        <div><dt>10%</dt><dd>across all lines, same definition</dd></div>
+        <div><dt>8x</dt><dd>more replies from API resellers than from studios, so I moved outbound to resellers</dd></div>
+      </dl>
+    </section>
+
+    <article class="prose">
+      <h2>The problem</h2>
+      <p>I was the first commercial hire at Viggle, selling an AI video API to studios, apps and resellers. Researched cold email written by hand capped me at a handful of accounts a day. A language model writes a plausible email in seconds. The risk is that plausible is not the same as true.</p>
+
+      <h2>What I built</h2>
+      <p>Four scheduled agents on Claude, HubSpot, Apollo and Clay. They source accounts, rank each one with a brief that cites its sources, draft first touches and follow ups for my approval, and log every step to HubSpot before the next one starts.</p>
+      <ol class="flow" aria-label="Pipeline">
+        <li>Source</li>
+        <li>Qualify<span>brief with URLs</span></li>
+        <li>Draft<span>a source per claim</span></li>
+        <li>Draft gate<span>mechanical rules</span></li>
+        <li>Account gate<span>CRM history</span></li>
+        <li class="human">I send</li>
+      </ol>
+
+      <h2>What broke</h2>
+      <p>In September, a line in my outreach said switching to us was just a new base URL and a key. It wasn't true: our API has its own request format and a create then poll flow. Around the same time, a customer quote carried forward inside a CRM note turned out to exist in no primary source.</p>
+      <p>The rule I made: every factual sentence in a draft needs a source beside it, or it becomes a question. A quote inherited from another note does not count as sourced.</p>
+      <p>Then I turned the rule into code. The draft gate blocks on length, banned phrases, unsourced numbers and cost assertions. The account gate blocks on CRM history: disqualified, already contacted, a draft already waiting, a promise made, a reply received. I published a version as <a href="https://github.com/howardhwt/outbound-gates">outbound-gates</a>, with a fictional product and 50 tests. Nothing in it sends email.</p>
+
+      <h2>Checking my own checks</h2>
+      <p>I wrote three quality checks for AI drafted first touches, then scored each draft before comparing it with what I actually sent. Only one check, whether the close matches the email's angle, predicted the edits I make. The other two tested whether a fact was unique to the account. I was judging whether it was relevant.</p>
+      <p>Under the old drafting rules, 0 of 14 first touches went out unedited and 12 needed heavy edits. Under the current rules, 15 of 35 went out unedited, 17 with light edits and 3 with heavy ones.</p>
+
+      <p class="note"><strong>How replies are counted.</strong> Companies with at least one reply written by a person, divided by companies emailed minus hard bounces. Counted from Gmail threads logged to HubSpot, Jul 14 to Oct 29, 2026. Excludes auto replies, helpdesk acknowledgements, bounces, inbound leads and existing customers. Includes replies that said no.</p>
+    </article>
+
+    <nav class="links" aria-label="Next">
+      <a class="primary" href="/work/viggle-console/">Next: Viggle Console</a>
+      <a href="/">Back to home</a>
+    </nav>
+  </main>
+  <footer class="wrap foot">© 2026 Howard Tam</footer>
+</body>
+</html>

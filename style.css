@@ -215,3 +215,51 @@ a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 .contact button:disabled { opacity: 0.6; cursor: progress; }
 .contact button:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 .status { font-size: 14px; line-height: 20px; color: var(--muted); }
+
+.work ul { list-style: none; display: grid; gap: 2px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.work a {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: background-color 300ms var(--ease);
+}
+.work a:hover { background: #272727; }
+.work .t { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.work .t::after { content: " →"; color: var(--muted); }
+.work .d { max-width: 65ch; font-size: 14px; line-height: 20px; color: var(--muted); }
+
+.back a { font-family: "Geist Mono", ui-monospace, monospace; font-size: 14px; line-height: 20px; color: var(--muted); text-decoration: none; }
+.back a::before { content: "← "; }
+.back a:hover { color: var(--text); }
+.case { gap: 48px; }
+.case h1 { max-width: 800px; }
+
+.prose { max-width: 65ch; }
+.prose h2 { font-size: 20px; line-height: 28px; font-weight: 600; color: var(--text); margin: 40px 0 12px; }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose li { color: #C8C8C8; text-wrap: pretty; }
+.prose p + p { margin-top: 16px; }
+.prose ul { margin-top: 16px; padding-left: 24px; display: grid; gap: 8px; }
+.prose a { color: var(--text); text-underline-offset: 4px; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+.flow { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 8px; padding: 0; counter-reset: step; }
+.flow li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text);
+}
+.flow li span { font-size: 12px; line-height: 16px; font-weight: 400; color: var(--muted); }
+.flow li.human { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+.note { margin-top: 40px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 20px; }

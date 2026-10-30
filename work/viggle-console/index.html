@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Viggle Console: a sales demo tool that became an MCP server · Howard Tam</title>
+  <meta name="description" content="Case study: a client side console for Viggle's video API, used by colleagues to test the API, later turned into an MCP server that lets Claude run paid video batches with spending guardrails.">
+  <meta property="og:title" content="Viggle Console: a sales demo tool that became an MCP server">
+  <meta property="og:description" content="An API console for demos, then an MCP server that lets Claude spend credits safely.">
+  <meta property="og:url" content="https://howardhwt.github.io/work/viggle-console/">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://howardhwt.github.io/work/viggle-console/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main" class="wrap case">
+    <nav class="back" aria-label="Breadcrumb"><a href="/">Howard Tam</a></nav>
+
+    <header>
+      <p class="eyebrow">Case study · Viggle · Mar to Oct 2026</p>
+      <h1>Viggle Console: a sales demo tool that became an MCP server</h1>
+      <p class="lede">I built a console so prospects and colleagues could see the API work before writing code. Then I put an MCP server on it so Claude could run paid video batches without overspending.</p>
+    </header>
+
+    <section class="facts" aria-label="Results">
+      <dl>
+        <div><dt>6</dt><dd>colleagues use it to test the API</dd></div>
+        <div><dt>5</dt><dd>API products in one screen, each call shown as curl, JavaScript and Python</dd></div>
+        <div><dt>159</dt><dd>tests, 43 of them on the MCP server</dd></div>
+        <div><dt>100</dt><dd>commits, built alone with Claude Code</dd></div>
+      </dl>
+    </section>
+
+    <article class="prose">
+      <h2>The problem</h2>
+      <p>Selling an API means the buyer has to see a call work before anyone writes code. Docs and curl examples were not enough for a live demo, and colleagues outside engineering had no way to try the product themselves.</p>
+
+      <h2>The console</h2>
+      <p>A client side app for Viggle's V1 API: React, Vite, no backend. One API key covers five modes: Video Remix, Generate, Animate, Image and 3D Export. Every call the page makes is shown as a snippet you can copy, there is a cost preview before every billable action, and error messages say whether to retry and what to change. It runs in English, Simplified Chinese and Traditional Chinese.</p>
+
+      <h2>The MCP server</h2>
+      <p>In October I added a stateless MCP endpoint, one Vercel function, that lets Claude submit a shot list, poll it and collect the clips. It reuses the console's API client and price estimator, so the console and Claude can never disagree about what something costs.</p>
+      <p>Most of the work went into making sure an agent cannot spend money by accident:</p>
+      <ul>
+        <li>Submitting takes two steps. The first prices the batch and stores a draft. The second sends it only if the caller repeats the exact credit figure.</li>
+        <li>Batches estimated above 150 credits are refused. Each shot gets at most 4 attempts.</li>
+        <li>The API has no idempotency key, so a confirmed batch is claimed once in Redis. A repeated or concurrent confirm sends nothing.</li>
+        <li>A submit that fails on the network is marked outcome unknown instead of retried, because the video may already have been billed.</li>
+        <li>The API key stays on the server, behind a bearer token.</li>
+      </ul>
+
+      <h2>What broke</h2>
+      <p>The video model's fetcher could not reach the host where uploads were stored. The fix: the server downloads the file and sends it to the API as a file instead of a URL.</p>
+      <p>Where it stands: the text to video path is verified live end to end. Animate and Remix are built from the API docs and tested against fakes only; I haven't run them through the endpoint against the live API yet.</p>
+    </article>
+
+    <nav class="links" aria-label="Next">
+      <a class="primary" href="/work/agentic-outbound/">Next: Agentic outbound</a>
+      <a href="/">Back to home</a>
+    </nav>
+  </main>
+  <footer class="wrap foot">© 2026 Howard Tam</footer>
+</body>
+</html>
