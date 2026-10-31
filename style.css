@@ -551,3 +551,8 @@ main.wrap { padding-top: 128px; }
 .work li > a:hover .thumb img { transform: scale(1.03); }
 @media (min-width: 768px) { .work li > a { grid-template-columns: minmax(0, 1fr) 240px; gap: 32px; align-items: center; } }
 @media (prefers-reduced-motion: reduce) { .work li > a:hover .thumb img, .tile:hover .media img, .tile:hover .media video { transform: none; } }
+
+/* FINDING-009: browser surfaces themed to the palette */
+html { color-scheme: dark; }
+::selection { background: var(--text); color: var(--bg); }
+input, textarea { caret-color: var(--text); }
