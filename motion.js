@@ -61,32 +61,32 @@
     }, { threshold: 0.3 }).observe(root);
   }
 
-  // Outbound pipeline: one draft passes both gates, the next is blocked at the draft gate.
-  const flow = document.querySelector('.flow');
-  if (flow) {
-    const nodes = [...flow.children];
-    const cap = document.querySelector('.flow-cap');
-    const STEP = 0.5, GATE = 3;
-    const captions = [
-      'A sourced draft clears both gates and waits for me to send it.',
-      'Blocked at the draft gate: a number with no source beside it.',
-    ];
-    let shown = '';
-    const say = (s) => { if (s !== shown) { shown = s; cap.textContent = s; } };
-    story(flow.parentElement, 6, (t, run) => {
-      const blocked = run % 2 === 1;
-      const stop = blocked ? GATE : nodes.length - 1;
-      const reached = Math.floor(t / STEP);
-      const resting = t > 4.8;
+  // Pinned pipeline: the step in the middle of the screen lights its node.
+  const steps = [...document.querySelectorAll('.pin-steps li')];
+  const nodes = [...document.querySelectorAll('.pin .flow li')];
+  if (steps.length && nodes.length) {
+    const setStep = (k) => {
+      steps.forEach((s, i) => s.classList.toggle('on', i === k));
       nodes.forEach((n, i) => {
-        n.classList.toggle('lit', !resting && i <= Math.min(reached, stop));
-        n.classList.toggle('blocked', !resting && blocked && i === GATE && reached >= GATE);
-        n.classList.toggle('sent', !resting && !blocked && i === nodes.length - 1 && reached >= stop);
+        n.classList.toggle('lit', i < k);
+        n.classList.toggle('current', i === k);
+        n.classList.toggle('sent', i === k && i === nodes.length - 1 && !reduced);
       });
-      cap.classList.toggle('on', !resting && reached >= stop);
-      if (reached >= stop && !resting) say(captions[blocked ? 1 : 0]);
-    }, () => {});
+    };
+    const stepIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) setStep(steps.indexOf(e.target)); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach((s) => stepIO.observe(s));
+    setStep(0);
   }
+
+  // Videos play only while on screen; reduced motion gets controls instead.
+  document.querySelectorAll('video[muted]').forEach((v) => {
+    if (reduced) { v.controls = true; return; }
+    new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) v.play().catch(() => {}); else v.pause();
+    }, { threshold: 0.4 }).observe(v);
+  });
 
   // MCP batch: priced, confirmed, shots go ready. Then a batch over the cap is refused.
   const term = document.querySelector('.term');

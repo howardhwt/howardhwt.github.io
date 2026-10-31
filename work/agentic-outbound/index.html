@@ -23,8 +23,9 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <header class="nav"><a class="brand" href="/" aria-label="Howard Tam, home"><span class="long">Howard Tam</span><span class="short">HT</span></a><a href="/work/" aria-current="page">Work</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/#contact-h">Contact</a></header>
   <main id="main" class="wrap case">
-    <nav class="back" aria-label="Breadcrumb"><a href="/">Howard Tam</a></nav>
+    <nav class="back" aria-label="Breadcrumb"><a href="/work/">Work</a></nav>
 
     <header class="hero">
       <p class="eyebrow">Case study · Viggle · Jul to Oct 2026</p>
@@ -47,15 +48,26 @@
 
       <h2>What I built</h2>
       <p>Four scheduled agents on Claude, HubSpot, Apollo and Clay. They source accounts, rank each one with a brief that cites its sources, draft first touches and follow ups for my approval, and log every step to HubSpot before the next one starts.</p>
-      <ol class="flow" aria-label="Pipeline">
-        <li>Source</li>
-        <li>Qualify<span>brief with URLs</span></li>
-        <li>Draft<span>a source per claim</span></li>
-        <li>Draft gate<span>mechanical rules</span></li>
-        <li>Account gate<span>CRM history</span></li>
-        <li class="human">I send</li>
-      </ol>
-      <p class="flow-cap" aria-hidden="true"></p>
+      <div class="pin">
+        <div class="pin-visual">
+          <ol class="flow" aria-label="Pipeline">
+            <li>Source</li>
+            <li>Qualify<span>brief with URLs</span></li>
+            <li>Draft<span>a source per claim</span></li>
+            <li>Draft gate<span>mechanical rules</span></li>
+            <li>Account gate<span>CRM history</span></li>
+            <li class="human">I send</li>
+          </ol>
+        </div>
+        <ol class="pin-steps">
+          <li><h3>Source</h3><p>Agents look wide for companies that fit, and skip any that are already in the CRM under another name.</p></li>
+          <li><h3>Qualify</h3><p>Each account gets a verdict card with the URLs behind it. If they would have to add a new feature to use the product, the account is parked, not emailed.</p></li>
+          <li><h3>Draft</h3><p>First touches and follow ups, written with a source beside every factual sentence.</p></li>
+          <li><h3>Draft gate</h3><p>Code, not judgment, blocks a draft on length, banned phrases, unsourced numbers and cost claims.</p><p class="eg">Example: <s>"Switching is just a new base URL and a key."</s> would be blocked as a product claim with no source.</p></li>
+          <li><h3>Account gate</h3><p>Code checks the CRM history: disqualified, already contacted, a draft already waiting, a promise made, a reply received.</p></li>
+          <li><h3>I send</h3><p>Nothing sends itself. I read each draft and send it, and the CRM logs it before anything else happens.</p></li>
+        </ol>
+      </div>
 
       <h2>What broke</h2>
       <p>In September, a line in my outreach said switching to us was just a new base URL and a key. It wasn't true: our API has its own request format and a create then poll flow. Around the same time, a customer quote carried forward inside a CRM note turned out to exist in no primary source.</p>
