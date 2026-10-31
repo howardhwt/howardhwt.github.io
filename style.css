@@ -543,3 +543,11 @@ main.wrap { padding-top: 128px; }
 /* FINDING-007: 44px touch targets for nav, buttons and pill links */
 .nav a { min-height: 44px; display: inline-flex; align-items: center; }
 .links a, .contact button { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* FINDING-008: case study cards carry a real artifact */
+.work li > a .txt { display: grid; gap: 8px; align-content: center; }
+.work .thumb { display: block; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+.work .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 500ms var(--ease); }
+.work li > a:hover .thumb img { transform: scale(1.03); }
+@media (min-width: 768px) { .work li > a { grid-template-columns: minmax(0, 1fr) 240px; gap: 32px; align-items: center; } }
+@media (prefers-reduced-motion: reduce) { .work li > a:hover .thumb img, .tile:hover .media img, .tile:hover .media video { transform: none; } }
