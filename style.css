@@ -512,3 +512,6 @@ main.wrap { padding-top: 128px; }
 .me p { font-size: 18px; line-height: 28px; max-width: 52ch; }
 @media (min-width: 768px) { .me { grid-template-columns: 280px 1fr; gap: 48px; } }
 .me { align-items: center; }
+.artifact { margin: 24px 0; }
+.artifact img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
+.artifact figcaption { margin-top: 12px; font-size: 14px; line-height: 20px; color: var(--muted); }

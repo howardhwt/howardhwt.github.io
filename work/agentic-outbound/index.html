@@ -73,6 +73,10 @@
       <p>In September, a line in my outreach said switching to us was just a new base URL and a key. It wasn't true: our API has its own request format and a create then poll flow. Around the same time, a customer quote carried forward inside a CRM note turned out to exist in no primary source.</p>
       <p>The rule I made: every factual sentence in a draft needs a source beside it, or it becomes a question. A quote inherited from another note does not count as sourced.</p>
       <p>Then I turned the rule into code. The draft gate blocks on length, banned phrases, unsourced numbers and cost assertions. The account gate blocks on CRM history: disqualified, already contacted, a draft already waiting, a promise made, a reply received. I published a version as <a href="https://github.com/howardhwt/outbound-gates">outbound-gates</a>, with a fictional product and 50 tests. Nothing in it sends email.</p>
+      <figure class="artifact">
+        <a href="https://github.com/howardhwt/outbound-gates"><img src="/img/outbound-gates-report.jpg" alt="The outbound-gates demo report: 7 accounts worked, 2 drafted, 3 blocked, 2 parked or queued, 0 emails sent, with one account opened to show its verdict card, its draft, and the pre-send check that blocked it" width="1200" height="1920" loading="lazy"></a>
+        <figcaption>The demo's own report: every account's verdict and the rule behind it. Company names are fictional. Note the last number: 0 emails sent.</figcaption>
+      </figure>
 
       <h2>Checking my own checks</h2>
       <p>I wrote three quality checks for AI drafted first touches, then scored each draft before comparing it with what I actually sent. Only one check, whether the close matches the email's angle, predicted the edits I make. The other two tested whether a fact was unique to the account. I was judging whether it was relevant.</p>
