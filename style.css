@@ -507,3 +507,8 @@ main.wrap { padding-top: 128px; }
 .pin .flow li.human.current { background: var(--text); color: var(--bg); border-color: var(--text); }
 .pin-visual { top: 64px; }
 @media (max-width: 480px) { .nav { gap: 0; } .nav a { padding: 8px; } }
+.me { grid-template-columns: 1fr; gap: 24px; max-width: none; align-items: end; }
+.me img { width: 100%; max-width: 280px; height: auto; aspect-ratio: 4 / 5; border-radius: 16px; }
+.me p { font-size: 18px; line-height: 28px; max-width: 52ch; }
+@media (min-width: 768px) { .me { grid-template-columns: 280px 1fr; gap: 48px; } }
+.me { align-items: center; }
