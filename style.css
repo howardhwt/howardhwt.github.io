@@ -534,3 +534,7 @@ main.wrap { padding-top: 128px; }
   .tiles .tile:first-child .media { aspect-ratio: auto; height: 100%; }
   .tiles .tile:first-child .t { font-size: 20px; line-height: 28px; }
 }
+
+/* FINDING-006: stats read as typeset figures, not four boxed tiles */
+.facts dl { background: none; border: 0; border-radius: 0; gap: 24px 32px; overflow: visible; }
+.facts dl > div { background: none; padding: 16px 0 0; border-top: 1px solid var(--line); }
