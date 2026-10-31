@@ -526,3 +526,11 @@ main.wrap { padding-top: 128px; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }
+
+/* FINDING-005: projects row as one lead tile plus two, not three equal columns */
+@media (min-width: 900px) {
+  .tiles { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; }
+  .tiles .tile:first-child { grid-row: span 2; grid-template-rows: minmax(0, 1fr) auto auto; }
+  .tiles .tile:first-child .media { aspect-ratio: auto; height: 100%; }
+  .tiles .tile:first-child .t { font-size: 20px; line-height: 28px; }
+}
