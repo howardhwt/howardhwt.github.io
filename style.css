@@ -515,3 +515,13 @@ main.wrap { padding-top: 128px; }
 .artifact { margin: 24px 0; }
 .artifact img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); }
 .artifact figcaption { margin-top: 12px; font-size: 14px; line-height: 20px; color: var(--muted); }
+
+/* Content that waits for a scroll reveal must still show when nothing scrolls: print, and reduced motion. */
+@media print {
+  .reveal, .js .term .ln { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+  .nav { position: static; margin: 0 0 24px; }
+  .pin-visual { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+}
