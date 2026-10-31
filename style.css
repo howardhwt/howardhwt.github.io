@@ -340,3 +340,21 @@ a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
   .flow li.sent::after { animation: none; }
 }
 .term .run[hidden] { display: none; }
+
+.jump {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 300ms var(--ease);
+}
+.jump:hover { border-color: var(--text); }
+.jump:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 4px; }
+#work-h { scroll-margin-top: 32px; }
+.fine { font-size: 12px; line-height: 16px; color: var(--muted); }
+.hero > :nth-child(4) { animation-delay: 180ms; }
+.status:empty { display: none; }

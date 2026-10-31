@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://howardhwt.github.io/sitemap.xml
