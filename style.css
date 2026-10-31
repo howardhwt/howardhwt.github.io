@@ -538,3 +538,7 @@ main.wrap { padding-top: 128px; }
 /* FINDING-006: stats read as typeset figures, not four boxed tiles */
 .facts dl { background: none; border: 0; border-radius: 0; gap: 24px 32px; overflow: visible; }
 .facts dl > div { background: none; padding: 16px 0 0; border-top: 1px solid var(--line); }
+
+/* FINDING-007: 44px touch targets for nav, buttons and pill links */
+.nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.links a, .contact button { min-height: 44px; display: inline-flex; align-items: center; }
