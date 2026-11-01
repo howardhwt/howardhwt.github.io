@@ -184,6 +184,21 @@ h2 {
 .more, .jump, .back a { position: relative; }
 .more::after, .jump::after, .back a::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; transform: translateY(-50%); }
 
+/* ---------- Home: hero with live pipeline ---------- */
+.hero-row { display: grid; gap: 40px; align-items: center; }
+.hero-flow { animation: appear 0.8s var(--e) 240ms both, fade 0.6s var(--e2) 240ms both; }
+.hero-flow .flow { margin: 0; }
+.hero-cap {
+  margin-top: 16px;
+  min-height: 40px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+  text-wrap: pretty;
+  transition: opacity 300ms var(--ease);
+}
+.hero-cap.swap { opacity: 0; }
+
 /* ---------- Home: figures ---------- */
 .facts dl {
   display: grid;
@@ -315,6 +330,7 @@ h2 {
   animation: ring 1.6s var(--e2) infinite;
 }
 .flow li.current { border-color: var(--text); background: var(--surface-2); }
+.flow li.dim { opacity: 0.35; }
 
 /* Pinned pipeline */
 .pin { display: grid; gap: 24px; margin: 24px 0; }
@@ -438,6 +454,9 @@ h2 {
   .me { grid-template-columns: 280px 1fr; gap: 48px; }
 }
 @media (min-width: 900px) {
+  .hero-row { grid-template-columns: minmax(0, 1fr) 260px; gap: 64px; }
+  .hero-flow .flow { flex-direction: column; flex-wrap: nowrap; }
+  .hero-flow .flow li { width: 100%; }
   .tiles { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; }
   .tiles .tile:first-child { grid-row: span 2; grid-template-rows: minmax(0, 1fr) auto auto; }
   .tiles .tile:first-child .media { aspect-ratio: auto; height: 100%; }
@@ -457,7 +476,7 @@ h2 {
 /* ---------- Reduced motion, no script, print ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .nav, .hero > *, .case > .back, .portrait img.photo-in, .flow li.sent::after { animation: none; }
+  .nav, .hero > *, .hero-flow, .case > .back, .portrait img.photo-in, .flow li.sent::after { animation: none; }
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
   .links a { transition: none; }
   .pin-steps li { opacity: 1; }

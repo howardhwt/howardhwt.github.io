@@ -88,6 +88,39 @@
     }, { threshold: 0.4 }).observe(v);
   });
 
+  // Home hero: one draft clears both gates, the next is blocked at the draft gate.
+  const heroFlow = document.querySelector('.hero-flow');
+  if (heroFlow) {
+    const nodes = [...heroFlow.querySelectorAll('.flow li')];
+    const cap = heroFlow.querySelector('.hero-cap');
+    const rest = cap.dataset.rest;
+    const lines = [
+      'A sourced draft clears both gates and waits for me to send it.',
+      'Blocked at the draft gate: a number with no source behind it.',
+    ];
+    let shown = rest;
+    const say = (text) => {
+      if (text === shown) return;
+      shown = text;
+      cap.classList.add('swap');
+      setTimeout(() => { cap.textContent = text; cap.classList.remove('swap'); }, 300);
+    };
+    const STEP = 0.45, GATE = 3;
+    story(heroFlow, 7, (t, run) => {
+      const blocked = run % 2 === 1;
+      const stop = blocked ? GATE : nodes.length - 1;
+      const reached = Math.floor((t - 0.6) / STEP);
+      const resting = t < 0.6 || t > 5.8;
+      nodes.forEach((n, i) => {
+        n.classList.toggle('lit', !resting && i <= Math.min(reached, stop));
+        n.classList.toggle('blocked', !resting && blocked && i === GATE && reached >= GATE);
+        n.classList.toggle('sent', !resting && !blocked && i === nodes.length - 1 && reached >= stop);
+        n.classList.toggle('dim', !resting && blocked && i > GATE && reached >= GATE);
+      });
+      say(resting ? rest : reached >= stop ? lines[blocked ? 1 : 0] : rest);
+    }, () => {});
+  }
+
   // MCP batch: priced, confirmed, shots go ready. Then a batch over the cap is refused.
   const term = document.querySelector('.term');
   if (term) {
