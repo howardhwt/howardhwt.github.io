@@ -459,7 +459,7 @@ h2 {
   .work li > a:hover .thumb img, .tile:hover .media img, .tile:hover .media video { transform: none; }
 }
 @media (scripting: none) {
-  .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; filter: none; }
 }
 /* Content that waits for a scroll reveal must still show when nothing scrolls. */
 @media print {
