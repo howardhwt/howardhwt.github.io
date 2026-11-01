@@ -47,10 +47,10 @@
       <p>Selling an API means the buyer has to see a call work before anyone writes code. Docs and curl examples were not enough for a live demo, and colleagues outside engineering had no way to try the product themselves.</p>
 
       <h2>The console</h2>
-      <p>A client side app for Viggle's V1 API: React, Vite, no backend. One API key covers five modes: Video Remix, Generate, Animate, Image and 3D Export. Every call the page makes is shown as a snippet you can copy, there is a cost preview before every billable action, and error messages say whether to retry and what to change. It runs in English, Simplified Chinese and Traditional Chinese.</p>
+      <p>A client side app for Viggle’s V1 API: React, Vite, no backend. One API key covers five modes: Video Remix, Generate, Animate, Image and 3D Export. Every call the page makes is shown as a snippet you can copy, there is a cost preview before every billable action, and error messages say whether to retry and what to change. It runs in English, Simplified Chinese and Traditional Chinese.</p>
 
       <h2>The MCP server</h2>
-      <p>In October I added a stateless MCP endpoint, one Vercel function, that lets Claude submit a shot list, poll it and collect the clips. It reuses the console's API client and price estimator, so the console and Claude always show the same estimate.</p>
+      <p>In October I added a stateless MCP endpoint, one Vercel function, that lets Claude submit a shot list, poll it and collect the clips. It reuses the console’s API client and price estimator, so the console and Claude always show the same estimate.</p>
       <p>Most of the work went into making sure an agent cannot spend money by accident:</p>
       <figure class="term" aria-label="Illustration of the batch flow">
         <div class="run">
@@ -75,8 +75,8 @@
       </ul>
 
       <h2>What broke</h2>
-      <p>The video model's fetcher could not reach the host where uploads were stored. The fix: the server downloads the file and sends it to the API as a file instead of a URL. That path is tested against fakes so far, not yet run live.</p>
-      <p>Where it stands: the text to video path is verified live end to end. Animate and Remix are built from the API docs and tested against fakes only; I haven't run them through the endpoint against the live API yet.</p>
+      <p>The video model’s fetcher could not reach the host where uploads were stored. The fix: the server downloads the file and sends it to the API as a file instead of a URL. That path is tested against fakes so far, not yet run live.</p>
+      <p>Where it stands: the text to video path is verified live end to end. Animate and Remix are built from the API docs and tested against fakes only; I haven’t run them through the endpoint against the live API yet.</p>
     </article>
 
     <nav class="links" aria-label="Next">
