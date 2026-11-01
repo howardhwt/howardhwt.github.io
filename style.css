@@ -180,6 +180,10 @@ h2 {
 .more { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 300ms var(--ease); }
 .more:hover { border-color: var(--text); }
 
+/* Text links keep their look but get a 44px tall hit area */
+.more, .jump, .back a { position: relative; }
+.more::after, .jump::after, .back a::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; transform: translateY(-50%); }
+
 /* ---------- Home: figures ---------- */
 .facts dl {
   display: grid;
@@ -273,6 +277,7 @@ h2 {
 .prose p + p { margin-top: 16px; }
 .prose ul { margin-top: 16px; padding-left: 24px; display: grid; gap: 8px; }
 .prose a { color: var(--text); text-underline-offset: 4px; }
+.prose a:visited, .chips a:visited { color: var(--text-2); }
 .prose strong { color: var(--text); font-weight: 600; }
 .note { margin-top: 40px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 20px; }
 
