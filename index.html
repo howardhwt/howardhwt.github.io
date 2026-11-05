@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Hide scroll reveals only if motion.js actually runs -->
+  <script>document.documentElement.classList.add('js');addEventListener('load',()=>{if(!window.siteMotion)document.documentElement.classList.remove('js')});</script>
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Person","name":"Howard Tam","url":"https://howardhwt.github.io/","jobTitle":"Founding Account Executive","address":{"@type":"PostalAddress","addressLocality":"Toronto","addressCountry":"CA"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Waterloo"},{"@type":"CollegeOrUniversity","name":"Lancaster University"}],"sameAs":["https://www.linkedin.com/in/howardhwt","https://github.com/howardhwt"]}
@@ -30,25 +32,36 @@
   <main id="main" class="wrap">
     <div class="hero-row">
       <header class="intro hero scrub">
-        <p class="eyebrow">Howard Tam · Toronto</p>
         <h1>I sell, and I build the systems I sell with.</h1>
         <p class="lede">
           I built the sales and CRM stacks at two startups from zero, at Sequence and at Viggle,
           then put an agentic outbound layer on top with Claude. Four years of selling inside
           B2B startups keep what I build grounded in how sellers actually work.
         </p>
-        <a class="jump" href="#work-h">Read the case studies ↓</a>
+        <p class="avail">Open to Founding AE and GTM Engineer roles at early stage B2B and AI companies. Based in Toronto.</p>
+        <p class="acts"><a class="jump" href="#work-h">Read the case studies ↓</a><a class="jump" href="#contact-h">Get in touch ↓</a></p>
       </header>
-      <figure class="hero-flow" aria-label="The outbound pipeline: source, qualify, draft, draft gate, account gate, then I send">
-        <ol class="flow">
+      <figure class="hero-flow" aria-label="The outbound system, then one real deal: source, qualify, draft, draft gate and account gate; then I send, reply, discovery call, API trial, pricing, signed, live in production">
+        <p class="zone">The system</p>
+        <ol class="flow sys">
           <li>Source</li>
           <li>Qualify<span>brief with URLs</span></li>
           <li>Draft<span>a source per claim</span></li>
           <li>Draft gate<span>mechanical rules</span></li>
           <li>Account gate<span>CRM history</span></li>
-          <li class="human">I send</li>
         </ol>
-        <figcaption class="hero-cap" data-rest="Every draft passes two gates. A person sends it.">Every draft passes two gates. A person sends it.</figcaption>
+        <p class="zone">Me</p>
+        <ol class="flow mine">
+          <li class="human">I send</li>
+          <li>Reply</li>
+          <li>Discovery call</li>
+          <li>API trial</li>
+          <li>Pricing</li>
+          <li>Signed</li>
+          <li class="end">Live in production</li>
+        </ol>
+        <figcaption class="hero-cap" data-rest="Every draft passes two gates. A person sends it. One real Viggle deal, anonymised.">Every draft passes two gates. A person sends it. One real Viggle deal, anonymised.</figcaption>
+        <div class="flow-foot"><span class="flow-note">Illustration · real deal path, anonymised</span></div>
       </figure>
     </div>
 
@@ -64,17 +77,17 @@
     <section class="work reveal" aria-labelledby="work-h">
       <div class="sec-head"><h2 id="work-h">Selected work</h2><a class="more" href="/work/">All work →</a></div>
       <ul>
-        <li><a href="/work/agentic-outbound/"><span class="txt"><span class="t">Agentic outbound that won’t send anything untrue</span><span class="d">Four scheduled agents, two gates, a person on send. 400+ companies, 15% human reply rate on the newest API line.</span></span><span class="thumb"><img src="/img/work-outbound.jpg" alt="The outbound-gates demo report: 7 accounts worked, 3 blocked, 0 emails sent" width="800" height="600" loading="lazy"></span></a></li>
-        <li><a href="/work/viggle-console/"><span class="txt"><span class="t">Viggle Console: a sales demo tool that became an MCP server</span><span class="d">An API console 6 colleagues use, then an MCP server that lets Claude run paid video batches with spending guardrails.</span></span><span class="thumb"><img src="/img/work-console.jpg" alt="Illustration of the MCP batch flow: priced at 42 credits, confirmed, six shots submitted" width="800" height="600" loading="lazy"></span></a></li>
+        <li><a href="/work/agentic-outbound/"><span class="txt"><span class="t">Agentic outbound that won’t send anything untrue</span><span class="d">Four scheduled agents, two gates, a person on send. 400+ companies, 15% human reply rate on the newest API line.</span></span><span class="thumb tally" role="img" aria-label="The outbound-gates demo run: 7 accounts worked, 2 drafted, 3 blocked, 2 parked or queued, 0 emails sent"><span><b>7</b>accounts worked</span><span><b>2</b>drafted</span><span><b>3</b>blocked</span><span><b>2</b>parked or queued</span><span class="key"><b>0</b>emails sent</span><span>one demo run</span></span></a></li>
+        <li><a href="/work/viggle-console/"><span class="txt"><span class="t">Viggle Console: a sales demo tool that became an MCP server</span><span class="d">An API console 6 colleagues use, then an MCP server that lets Claude run paid video batches with spending guardrails.</span></span><span class="thumb"><img src="/img/work-console.jpg" alt="Illustration of the MCP batch flow: priced at 42 credits, confirmed, six shots submitted" width="800" height="400" loading="lazy"></span></a></li>
       </ul>
     </section>
 
     <section class="reveal" aria-labelledby="proj-h">
       <div class="sec-head"><h2 id="proj-h">Projects</h2><a class="more" href="/projects/">All projects →</a></div>
       <div class="tiles">
-        <a class="tile" href="/projects/"><span class="media"><img src="/img/salency.jpg" alt="The salency.ai home page" width="1440" height="900" loading="lazy"></span><span class="t">Salency</span><span class="d">Co-founding a memory layer for sales calls. My first go at founding.</span></a>
-        <a class="tile" href="/projects/"><span class="media"><video src="/media/bramley.mp4" poster="/img/bramley-poster.jpg" muted loop playsinline preload="none" aria-label="Bramley home screen"></video></span><span class="t">Bramley</span><span class="d">An Apple inspired OS for the TrimUI Brick handheld, open source.</span></a>
-        <a class="tile" href="/closing-time/"><span class="media"><video src="/media/closing-time.mp4" poster="/img/closing-time-poster.jpg" muted loop playsinline preload="none" aria-label="收舖 Closing Time gameplay"></video></span><span class="t">收舖 Closing Time</span><span class="d">A browser horror game set in a 1989 Hong Kong cha chaan teng.</span></a>
+        <a class="tile" href="/projects/#salency"><span class="media"><img src="/img/salency.jpg" alt="The salency.ai home page" width="1440" height="900" loading="lazy"></span><span class="t">Salency</span><span class="d">Co-founding a memory layer for sales calls. My first go at founding.</span></a>
+        <a class="tile" href="/projects/#bramley"><span class="media"><video src="/media/bramley.mp4" poster="/img/bramley-poster.jpg" muted loop playsinline preload="none" aria-label="Bramley home screen"></video></span><span class="t">Bramley</span><span class="d">An Apple inspired OS for the TrimUI Brick handheld, open source.</span></a>
+        <a class="tile" href="/projects/#closing-time"><span class="media"><video src="/media/closing-time.mp4" poster="/img/closing-time-poster.jpg" muted loop playsinline preload="none" aria-label="收舖 Closing Time gameplay"></video></span><span class="t">收舖 Closing Time</span><span class="d">A browser horror game set in a 1989 Hong Kong cha chaan teng.</span></a>
       </div>
     </section>
 
@@ -84,32 +97,30 @@
         <img src="/img/howard.jpg" alt="Howard Tam, portrait" width="240" height="300" loading="lazy">
         <div>
           <p>Hong Kong banking, then a Waterloo MBET, then Toronto startups. Hired to sell, I keep ending up building the system the job needs.</p>
-          <p>Outside work: guitar, photography, retro handhelds, coffee and travel.</p>
         </div>
       </div>
     </section>
 
-    <p class="open reveal">Open to Founding AE and GTM Engineer roles at early stage B2B and AI companies.</p>
-
     <section class="contact reveal" aria-labelledby="contact-h">
-      <h2 id="contact-h">Send a message</h2>
-      <form id="contact" novalidate>
+      <h2 id="contact-h">Tell me what you’re building.</h2>
+      <p class="contact-note">I reply within two business days. You can also <a id="mail" data-u="wh.mat.drawoh" data-d="moc.liamg">email me</a> or message me on <a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a>.</p>
+      <form id="contact" action="https://api.web3forms.com/submit" method="POST" novalidate>
         <input type="hidden" name="access_key" value="160a0a28-0e5e-43ad-8369-a830430b0156">
         <input type="hidden" name="subject" value="New message from howardhwt.github.io">
         <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="field">
           <label for="f-name">Name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
           <p class="err" id="e-name"></p>
         </div>
         <div class="field">
           <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
           <p class="err" id="e-email"></p>
         </div>
         <div class="field">
           <label for="f-msg">Message</label>
-          <textarea id="f-msg" name="message" rows="5" required></textarea>
+          <textarea id="f-msg" name="message" rows="5" required aria-describedby="e-msg"></textarea>
           <p class="err" id="e-msg"></p>
         </div>
         <button type="submit">Send message</button>
@@ -117,15 +128,11 @@
         <p class="fine">Messages go to my inbox via Web3Forms. Nothing else is stored.</p>
       </form>
     </section>
-
-    <nav class="links reveal" aria-label="Contact">
-      <a id="mail" href="https://www.linkedin.com/in/howardhwt" data-u="wh.mat.drawoh" data-d="moc.liamg">Email me</a>
-      <a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a>
-      <a href="https://github.com/howardhwt">GitHub</a>
-      <a href="https://github.com/howardhwt/outbound-gates">outbound-gates</a>
-    </nav>
   </main>
-  <footer class="wrap foot">© 2026 Howard Tam</footer>
+  <footer class="wrap foot">
+    <span>© 2026 Howard Tam</span>
+    <nav aria-label="Elsewhere"><a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a><a href="https://github.com/howardhwt">GitHub</a><a href="https://github.com/howardhwt/outbound-gates">outbound-gates repo</a></nav>
+  </footer>
   <script>
     const m = document.getElementById('mail');
     const rev = (v) => v.split('').reverse().join('');
@@ -135,18 +142,22 @@
     const checks = [
       ['f-name', 'e-name', (v) => v.trim() ? '' : 'Add your name.'],
       ['f-email', 'e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Add a valid email so I can reply.'],
-      ['f-msg', 'e-msg', (v) => v.trim().length >= 10 ? '' : 'Write at least a sentence.'],
+      ['f-msg', 'e-msg', (v) => v.trim() ? '' : 'Write a short message.'],
     ];
+    const check = ([id, eid, test]) => {
+      const el = document.getElementById(id); const msg = test(el.value);
+      document.getElementById(eid).textContent = msg;
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return msg ? el : null;
+    };
+    // Once a field has been flagged, re-check it as the visitor fixes it.
+    checks.forEach((c) => document.getElementById(c[0]).addEventListener('input', (ev) => {
+      if (ev.target.getAttribute('aria-invalid') === 'true') check(c);
+    }));
     f.addEventListener('submit', async (ev) => {
       ev.preventDefault();
-      let ok = true;
-      checks.forEach(([id, eid, test]) => {
-        const el = document.getElementById(id); const msg = test(el.value);
-        document.getElementById(eid).textContent = msg;
-        el.setAttribute('aria-invalid', msg ? 'true' : 'false');
-        if (msg && ok) { el.focus(); ok = false; }
-      });
-      if (!ok) return;
+      const bad = checks.map(check).filter(Boolean);
+      if (bad.length) { bad[0].focus(); return; }
       const btn = f.querySelector('button');
       btn.disabled = true; btn.textContent = 'Sending…'; status.textContent = '';
       try {
@@ -154,13 +165,14 @@
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(f),
+          signal: AbortSignal.timeout(15000),
         });
         const data = await res.json();
         if (!data.success) throw new Error(data.message);
         f.reset();
-        status.textContent = "Message sent. I'll reply within two business days.";
+        status.textContent = 'Message sent. I’ll reply within two business days.';
       } catch {
-        status.textContent = "Message didn't send. Try again, or reach me on LinkedIn.";
+        status.textContent = 'Message didn’t send. Try again, or reach me on LinkedIn.';
       } finally {
         btn.disabled = false; btn.textContent = 'Send message';
       }

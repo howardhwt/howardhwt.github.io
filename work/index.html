@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Hide scroll reveals only if motion.js actually runs -->
+  <script>document.documentElement.classList.add('js');addEventListener('load',()=>{if(!window.siteMotion)document.documentElement.classList.remove('js')});</script>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -31,8 +33,8 @@
     </header>
     <section class="work reveal" aria-label="Case studies">
       <ul>
-        <li><a href="/work/agentic-outbound/"><span class="txt"><span class="t">Agentic outbound that won’t send anything untrue</span><span class="d">Four scheduled agents, two gates, a person on send. 400+ companies, 15% human reply rate on the newest API line.</span></span><span class="thumb"><img src="/img/work-outbound.jpg" alt="The outbound-gates demo report: 7 accounts worked, 3 blocked, 0 emails sent" width="800" height="600" loading="lazy"></span></a></li>
-        <li><a href="/work/viggle-console/"><span class="txt"><span class="t">Viggle Console: a sales demo tool that became an MCP server</span><span class="d">An API console 6 colleagues use, then an MCP server that lets Claude run paid video batches with spending guardrails.</span></span><span class="thumb"><img src="/img/work-console.jpg" alt="Illustration of the MCP batch flow: priced at 42 credits, confirmed, six shots submitted" width="800" height="600" loading="lazy"></span></a></li>
+        <li><a href="/work/agentic-outbound/"><span class="txt"><span class="t">Agentic outbound that won’t send anything untrue</span><span class="d">Four scheduled agents, two gates, a person on send. 400+ companies, 15% human reply rate on the newest API line.</span></span><span class="thumb tally" role="img" aria-label="The outbound-gates demo run: 7 accounts worked, 2 drafted, 3 blocked, 2 parked or queued, 0 emails sent"><span><b>7</b>accounts worked</span><span><b>2</b>drafted</span><span><b>3</b>blocked</span><span><b>2</b>parked or queued</span><span class="key"><b>0</b>emails sent</span><span>one demo run</span></span></a></li>
+        <li><a href="/work/viggle-console/"><span class="txt"><span class="t">Viggle Console: a sales demo tool that became an MCP server</span><span class="d">An API console 6 colleagues use, then an MCP server that lets Claude run paid video batches with spending guardrails.</span></span><span class="thumb"><img src="/img/work-console.jpg" alt="Illustration of the MCP batch flow: priced at 42 credits, confirmed, six shots submitted" width="800" height="400" loading="lazy"></span></a></li>
       </ul>
     </section>
   </main>

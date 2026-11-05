@@ -13,6 +13,8 @@
   --e: cubic-bezier(0.16, 1, 0.3, 1);
   --e2: cubic-bezier(0.33, 1, 0.68, 1);
   --mono: "Geist Mono", ui-monospace, monospace;
+  /* Reading measure: Geist sets ~1.4 characters per ch, so 52ch is ~72 characters a line. */
+  --measure: 52ch;
 }
 
 /* ---------- Base ---------- */
@@ -40,7 +42,7 @@ main.wrap {
   align-content: start;
 }
 .case { gap: 48px; }
-#contact-h, #work-h { scroll-margin-top: 96px; }
+#contact-h, #work-h, .proj article { scroll-margin-top: 96px; }
 
 .skip {
   position: absolute;
@@ -49,12 +51,15 @@ main.wrap {
   padding: 8px 12px;
   background: var(--text);
   color: var(--bg);
-  border-radius: 6px;
+  border-radius: 8px;
   z-index: 10;
 }
 .skip:focus { top: 16px; }
 
-.foot { padding-bottom: 32px; font-size: 12px; line-height: 16px; color: var(--muted); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 16px; padding-bottom: 32px; font-size: 12px; line-height: 16px; color: var(--muted); }
+.foot nav { display: flex; gap: 16px; }
+.foot nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; transition: color 300ms var(--ease); }
+.foot nav a:hover { color: var(--text); }
 .fine { font-size: 12px; line-height: 16px; color: var(--muted); }
 
 /* ---------- Type ---------- */
@@ -73,10 +78,7 @@ h1 {
   font-weight: 600;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  background: linear-gradient(90deg, var(--white), var(--muted));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text);
 }
 .case h1 { max-width: 800px; }
 h2 {
@@ -88,14 +90,16 @@ h2 {
   margin-bottom: 16px;
 }
 .lede {
-  max-width: 65ch;
+  max-width: var(--measure);
   margin-top: 24px;
   font-size: 18px;
   line-height: 28px;
   color: var(--muted);
   text-wrap: pretty;
 }
-.open { max-width: 65ch; font-size: 18px; line-height: 28px; margin-bottom: -40px; text-wrap: pretty; }
+.avail { max-width: var(--measure); margin-top: 16px; font-weight: 500; color: var(--text); text-wrap: pretty; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; }
+.acts .jump { margin-top: 0; }
 .when { font-family: var(--mono); font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 /* ---------- Navigation ---------- */
@@ -114,7 +118,7 @@ h2 {
   padding: 4px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(24, 24, 24, 0.72);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   animation: appear 0.8s var(--e) both;
@@ -187,13 +191,67 @@ h2 {
 /* ---------- Home: hero with live pipeline ---------- */
 .hero-row { display: grid; gap: 40px; align-items: center; }
 .hero-flow { animation: appear 0.8s var(--e) 240ms both, fade 0.6s var(--e2) 240ms both; }
-.hero-flow .flow { margin: 0; }
-.hero-cap {
-  margin-top: 16px;
-  min-height: 40px;
+.hero-flow { max-width: 420px; }
+.hero-flow .flow { margin: 0; flex-direction: column; flex-wrap: nowrap; }
+.hero-flow .flow li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 16px; font-size: 16px; line-height: 24px; }
+.hero-flow .flow li span { font-size: 14px; line-height: 20px; }
+/* Two labelled zones: what the system does, then what I do with the deal. */
+.hero-flow .zone { margin: 0 0 8px; font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); }
+.hero-flow .flow + .zone { margin-top: 16px; }
+/* The deal steps are compact rows so the whole path stays about hero height. */
+.hero-flow .mine li { padding: 4px 16px; font-size: 14px; line-height: 20px; }
+.hero-flow .flow li.human:not(.lit) { border-color: var(--line); }
+.hero-flow .flow li.end.lit { background: var(--text); color: var(--bg); border-color: var(--text); }
+/* Connectors: the pipeline reads as one path, and each link lights as a draft passes it. */
+.hero-flow .flow li + li::before { content: ""; position: absolute; left: 23px; top: -9px; width: 1px; height: 8px; background: var(--line); transition: background-color 300ms var(--ease); }
+.hero-flow .flow li.lit::before { background: var(--text-2); }
+/* While a draft runs, steps it has not reached step back so the lit path reads at a glance. */
+.hero-flow.live .flow li:not(.lit) { color: var(--muted); }
+.hero-flow .flow li.lit { border-color: var(--text-2); }
+/* The stop and the hand-off are marked on the draft, in a tag; the gate itself stays intact. */
+.hero-flow .flow li.blocked { border-color: var(--text); background: var(--bg); }
+.hero-flow .flow li.blocked span { visibility: hidden; }
+.hero-flow .flow li.blocked::after, .hero-flow .flow li.ready::after {
+  content: "draft stopped";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  background: var(--text);
+  color: var(--bg);
+}
+.hero-flow .flow li.ready::after { content: "draft ready"; background: var(--bg); color: var(--text); }
+.flow-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 8px; }
+.flow-note { font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); }
+.flow-ctl {
+  position: relative;
+  padding: 0;
+  font: inherit;
   font-size: 14px;
   line-height: 20px;
-  color: var(--muted);
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color 300ms var(--ease);
+}
+.flow-ctl:hover { border-color: var(--text); }
+.flow-ctl:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+.flow-ctl::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; transform: translateY(-50%); }
+.hero-cap {
+  margin-top: 16px;
+  min-height: 48px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-2);
   text-wrap: pretty;
   transition: opacity 300ms var(--ease);
 }
@@ -202,7 +260,7 @@ h2 {
 /* ---------- Home: figures ---------- */
 .facts dl {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px 32px;
 }
 .facts dl > div { padding: 16px 0 0; border-top: 1px solid var(--line); }
@@ -224,27 +282,40 @@ h2 {
 .work li > a .txt { display: grid; gap: 8px; align-content: center; }
 .work .t { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
 .work .t::after { content: " →"; color: var(--muted); }
-.work .d { max-width: 65ch; font-size: 14px; line-height: 20px; color: var(--muted); }
-.work .thumb { display: block; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+.work .d { max-width: var(--measure); font-size: 14px; line-height: 20px; color: var(--muted); }
+.work .thumb { display: block; aspect-ratio: 2 / 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
 .work .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 500ms var(--ease); }
 .work li > a:hover .thumb img { transform: scale(1.03); }
+/* Outbound thumbnail: the demo run's real tally, set in type so it stays legible at thumbnail size. */
+.work .tally { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); font-family: var(--mono); }
+.work .tally > span { display: flex; flex-direction: column; justify-content: flex-start; gap: 2px; padding: 8px 12px; background: var(--black); font-size: 12px; line-height: 16px; color: var(--muted); }
+.work .tally b { font-size: 24px; line-height: 28px; font-weight: 400; color: var(--text); font-variant-numeric: tabular-nums; }
+.work .tally .key { color: var(--text); }
 
 /* ---------- Home: project tiles and about teaser ---------- */
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-.tile { display: grid; gap: 12px; color: var(--text); text-decoration: none; }
-.tile .media { aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--black); }
-.tile .media img, .tile .media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms var(--ease); }
-.tile:hover .media img, .tile:hover .media video { transform: scale(1.03); }
-.tile .t { font-size: 16px; line-height: 24px; font-weight: 600; }
-.tile .d { font-size: 14px; line-height: 20px; color: var(--muted); }
+/* Supporting work: compact rows on phones, three equal columns from 768px.
+   Thumbnails stay grey until hovered so side projects never outshout the case studies. */
+.tiles { display: grid; gap: 16px; }
+.tile { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; color: var(--text); text-decoration: none; }
+.tile .media { grid-row: span 2; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--black); }
+.tile .media img, .tile .media video { width: 100%; height: 100%; object-fit: cover; object-position: left center; display: block; filter: saturate(0); transition: transform 500ms var(--ease), filter 500ms var(--ease); }
+.tile:hover .media img, .tile:hover .media video, .tile:focus-visible .media img, .tile:focus-visible .media video { transform: scale(1.03); filter: none; }
+.tile .t { align-self: end; font-size: 16px; line-height: 24px; font-weight: 600; }
+.tile .d { align-self: start; font-size: 14px; line-height: 20px; color: var(--muted); }
 
-.me { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
-.me img { width: 100%; max-width: 280px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
-.me p { color: var(--text-2); text-wrap: pretty; font-size: 18px; line-height: 28px; max-width: 52ch; }
-.me p + p { margin-top: 8px; }
+.me { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; }
+.me img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; }
+.me p { color: var(--text-2); text-wrap: pretty; max-width: var(--measure); }
 
 /* ---------- Contact form ---------- */
-.contact form { display: grid; gap: 16px; max-width: 560px; }
+/* The page's ask carries display weight, not section-label weight. */
+.contact h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.02em; text-wrap: balance; }
+.contact-note { max-width: var(--measure); margin-bottom: 24px; color: var(--text-2); text-wrap: pretty; }
+.contact-note a { color: var(--text); text-underline-offset: 4px; }
+.contact-note a:visited { color: var(--text-2); }
+/* Without JavaScript the email link never gets its address; read it as plain text, not a dead link. */
+.contact-note a:not([href]) { color: inherit; text-decoration: none; }
+.contact form { display: grid; gap: 24px; max-width: 560px; }
 .field { display: grid; gap: 8px; }
 .field label { font-size: 14px; line-height: 20px; font-weight: 500; }
 .field input, .field textarea {
@@ -258,8 +329,21 @@ h2 {
 }
 .field textarea { resize: vertical; }
 .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
-.field [aria-invalid="true"] { border-color: var(--muted); }
-.err { font-size: 14px; line-height: 20px; color: var(--text); }
+/* An invalid field doubles its edge (border plus an inset outline), so it reads without colour. */
+.field [aria-invalid="true"] { border-color: var(--text); outline: 1px solid var(--text); outline-offset: -2px; }
+/* Errors speak in the machine voice, tucked under their field behind a Chalk status square,
+   so they can't be mistaken for the next field's label. */
+.err {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -4px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text);
+}
+.err::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 1px; background: var(--text); }
 .err:empty { display: none; }
 .trap { position: absolute; left: -9999px; }
 .contact button {
@@ -285,7 +369,7 @@ h2 {
 .status:empty { display: none; }
 
 /* ---------- Case studies ---------- */
-.prose { max-width: 65ch; }
+.prose { max-width: var(--measure); }
 .prose h2 { font-size: 20px; line-height: 28px; font-weight: 600; color: var(--text); margin: 40px 0 12px; }
 .prose h2:first-child { margin-top: 0; }
 .prose p, .prose li { color: var(--text-2); text-wrap: pretty; }
@@ -317,16 +401,15 @@ h2 {
   transition: background-color 300ms var(--ease), border-color 300ms var(--ease), color 300ms var(--ease), opacity 300ms var(--ease), transform 500ms var(--ease);
 }
 .flow li span { font-size: 12px; line-height: 16px; font-weight: 400; color: var(--muted); }
-.flow li.human { background: var(--text); color: var(--bg); border-color: var(--text); }
+.flow li.human { border-color: var(--text); }
 .flow li.lit { border-color: var(--muted); background: var(--surface-2); }
-.flow li.human.lit { background: var(--white); }
-.flow li.blocked { border-color: var(--text); background: var(--bg); text-decoration: line-through; transform: translateX(2px); }
+.flow li.human.lit { background: var(--text); color: var(--bg); border-color: var(--text); }
 .flow li.sent::after {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: 8px;
-  border: 1px solid var(--white);
+  outline: 1px solid var(--white);
   animation: ring 1.6s var(--e2) infinite;
 }
 .flow li.current { border-color: var(--text); background: var(--surface-2); }
@@ -414,7 +497,8 @@ h2 {
   to { opacity: 1; transform: none; filter: none; }
 }
 @keyframes fade { from { opacity: 0; } }
-@keyframes ring { from { opacity: 0.6; transform: scale(1); } to { opacity: 0; transform: scale(1.25); } }
+/* The ring grows by a fixed 8px (not a scale) so a full-width node never overflows the page. */
+@keyframes ring { from { opacity: 0.6; outline-offset: 0; } to { opacity: 0; outline-offset: 8px; } }
 @keyframes photo-in { from { filter: blur(14px) saturate(0.6); opacity: 0; } to { filter: none; opacity: 1; } }
 
 .hero > * { animation: appear 0.8s var(--e) both, fade 0.6s var(--e2) both; }
@@ -423,13 +507,13 @@ h2 {
 .hero > :nth-child(4) { animation-delay: 180ms; }
 .case > .back { animation: appear 0.8s var(--e) both; }
 
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(16px);
   filter: blur(4px);
   transition: opacity 700ms var(--e2), transform 700ms var(--e), filter 700ms var(--e2);
 }
-.reveal.in { opacity: 1; transform: none; filter: none; }
+.js .reveal.in { opacity: 1; transform: none; filter: none; }
 
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -442,6 +526,9 @@ h2 {
 
 /* ---------- Breakpoints ---------- */
 @media (max-width: 480px) {
+  /* Stats as a 2x2 grid so the first case study shows sooner on phones. */
+  .facts dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+  .facts dt { font-size: 24px; line-height: 32px; }
   .nav { gap: 0; }
   .nav a { padding: 8px; }
   .nav .brand .long { display: none; }
@@ -450,18 +537,20 @@ h2 {
 @media (min-width: 768px) {
   main.wrap { padding-top: 160px; }
   h1 { font-size: 60px; }
-  .work li > a { grid-template-columns: minmax(0, 1fr) 240px; gap: 32px; align-items: center; }
-  .me { grid-template-columns: 280px 1fr; gap: 48px; }
+  .work li > a { grid-template-columns: minmax(0, 1fr) minmax(240px, 32%); gap: 32px; align-items: center; }
+  /* Projects stay supporting work: small thumbnails beside text, not media tiles that outshine the case studies. */
+  .tile { grid-template-columns: 96px minmax(0, 1fr); align-content: start; }
+  .me { grid-template-columns: 160px minmax(0, 1fr); gap: 32px; }
+  .me p { font-size: 18px; line-height: 28px; }
 }
 @media (min-width: 900px) {
-  .hero-row { grid-template-columns: minmax(0, 1fr) 260px; gap: 64px; }
-  .hero-flow .flow { flex-direction: column; flex-wrap: nowrap; }
-  .hero-flow .flow li { width: 100%; }
-  .tiles { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; }
-  .tiles .tile:first-child { grid-row: span 2; grid-template-rows: minmax(0, 1fr) auto auto; }
-  .tiles .tile:first-child .media { aspect-ratio: auto; height: 100%; }
-  .tiles .tile:first-child .media img { object-position: left center; }
-  .tiles .tile:first-child .t { font-size: 20px; line-height: 28px; }
+  /* Figures: one row, however many there are, so none is orphaned on a row of its own. */
+  .facts dl { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  /* Contact: the ask and the reply promise on the left, the form on the right. */
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); grid-template-rows: auto 1fr; gap: 0 64px; align-items: start; }
+  .contact h2 { grid-column: 1; grid-row: 1; }
+  .contact-note { grid-column: 1; grid-row: 2; max-width: 400px; margin: 0; }
+  .contact form { grid-column: 2; grid-row: 1 / span 2; }
   .proj article { grid-template-columns: 7fr 5fr; gap: 48px; }
   .proj article:nth-child(even) .media { order: 2; }
   .about { grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; }
@@ -472,18 +561,20 @@ h2 {
   .pin .flow li { width: 100%; }
   .pin-steps li { padding: 48px 0; min-height: 40vh; }
 }
+@media (min-width: 1100px) {
+  /* The pipeline is the page's proof: a real column beside the claim, not a sidebar widget. */
+  .hero-row { grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; }
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+}
 
 /* ---------- Reduced motion, no script, print ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .nav, .hero > *, .hero-flow, .case > .back, .portrait img.photo-in, .flow li.sent::after { animation: none; }
-  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; filter: none; transition: none; }
   .links a { transition: none; }
   .pin-steps li { opacity: 1; }
-  .work li > a:hover .thumb img, .tile:hover .media img, .tile:hover .media video { transform: none; }
-}
-@media (scripting: none) {
-  .reveal { opacity: 1; transform: none; filter: none; }
+  .work li > a:hover .thumb img, .tile:hover .media img, .tile:hover .media video, .tile:focus-visible .media img, .tile:focus-visible .media video { transform: none; }
 }
 /* Content that waits for a scroll reveal must still show when nothing scrolls. */
 @media print {

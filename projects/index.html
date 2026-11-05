@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Hide scroll reveals only if motion.js actually runs -->
+  <script>document.documentElement.classList.add('js');addEventListener('load',()=>{if(!window.siteMotion)document.documentElement.classList.remove('js')});</script>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -31,7 +33,7 @@
     </header>
 
     <section class="proj" aria-label="Projects">
-      <article class="reveal">
+      <article class="reveal" id="salency">
         <div class="media grow"><a href="https://salency.ai"><img src="/img/salency.jpg" alt="The salency.ai home page: the institutional memory for revenue teams, beside a generated account brief" width="1440" height="900" loading="lazy"></a></div>
         <div>
           <p class="kicker">Startup · co-founded · building</p>
@@ -42,7 +44,7 @@
         </div>
       </article>
 
-      <article class="reveal">
+      <article class="reveal" id="bramley">
         <div class="media grow"><video src="/media/bramley.mp4" poster="/img/bramley-poster.jpg" muted loop playsinline preload="none" width="960" height="720" aria-label="Bramley tour: home screen, game library, music player and quick menu"></video></div>
         <div>
           <p class="kicker">Handheld OS · C · open source</p>
@@ -53,7 +55,7 @@
         </div>
       </article>
 
-      <article class="reveal">
+      <article class="reveal" id="closing-time">
         <div class="media grow"><video src="/media/closing-time.mp4" poster="/img/closing-time-poster.jpg" muted loop playsinline preload="none" width="1280" height="720" aria-label="收舖 Closing Time: a corridor and a cha chaan teng counter at night"></video></div>
         <div>
           <p class="kicker">Browser game · Oct 2026</p>
@@ -64,7 +66,7 @@
         </div>
       </article>
 
-      <article class="reveal">
+      <article class="reveal" id="outbound-gates">
         <div class="text-only">
           <p class="kicker">Python · open source · 50 tests</p>
           <h2>outbound-gates</h2>

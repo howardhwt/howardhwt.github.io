@@ -1,6 +1,7 @@
 // Site motion: scroll reveals, counters, and the two story loops.
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.siteMotion = true;
   document.documentElement.classList.add('js');
 
   // Scroll reveal for text sections, once.
@@ -80,45 +81,98 @@
     setStep(0);
   }
 
-  // Videos play only while on screen; reduced motion gets controls instead.
+  // Videos play only while on screen; reduced motion and data saver get controls instead.
+  const saveData = navigator.connection && navigator.connection.saveData;
   document.querySelectorAll('video[muted]').forEach((v) => {
-    if (reduced) { v.controls = true; return; }
+    if (reduced || saveData) { v.controls = true; return; }
     new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) v.play().catch(() => {}); else v.pause();
     }, { threshold: 0.4 }).observe(v);
   });
 
-  // Home hero: one draft clears both gates, the next is blocked at the draft gate.
+  // Home hero: a draft blocked at the draft gate, then one that clears both gates,
+  // which I send and carry through one real (anonymised) deal to production. It ends
+  // there. The button pauses or replays it; reduced motion shows the finished deal.
   const heroFlow = document.querySelector('.hero-flow');
   if (heroFlow) {
     const nodes = [...heroFlow.querySelectorAll('.flow li')];
     const cap = heroFlow.querySelector('.hero-cap');
     const rest = cap.dataset.rest;
-    const lines = [
-      'A sourced draft clears both gates and waits for me to send it.',
-      'Blocked at the draft gate: a number with no source behind it.',
-    ];
+    const SENT = nodes.findIndex((n) => n.classList.contains('human'));
+    const GATE = 3, LAST = nodes.length - 1;
+    const lines = {
+      blocked: 'Blocked at the draft gate: a number with no source behind it.',
+      sent: 'A sourced draft clears both gates. I send it.',
+      deal: 'From the reply on, the deal is mine: a discovery call, an API trial, pricing, signed, live in production.',
+    };
     let shown = rest;
-    const say = (text) => {
+    const say = (text, now) => {
       if (text === shown) return;
       shown = text;
+      if (now) { cap.textContent = text; return; }
       cap.classList.add('swap');
       setTimeout(() => { cap.textContent = text; cap.classList.remove('swap'); }, 300);
     };
-    const STEP = 0.45, GATE = 3;
-    story(heroFlow, 7, (t, run) => {
-      const blocked = run % 2 === 1;
-      const stop = blocked ? GATE : nodes.length - 1;
-      const reached = Math.floor((t - 0.6) / STEP);
-      const resting = t < 0.6 || t > 5.8;
+    // When each node lights: the system at a machine pace, a beat on the hand-off, then the deal.
+    const at = nodes.map((_, i) => (i <= SENT ? 0.6 + i * 0.45 : 0.6 + SENT * 0.45 + 1.4 + (i - SENT - 1) * 0.6));
+    const BLOCK_RUN = 7;                   // first run: blocked, then back to rest
+    const total = BLOCK_RUN + at[LAST] + 0.4; // second run ends on the live deal
+    const render = (time, now) => {
+      const blocked = time < BLOCK_RUN;
+      const t = blocked ? time : time - BLOCK_RUN;
+      const stop = blocked ? GATE : LAST;
+      const reached = Math.min(stop, at.filter((a) => a <= t).length - 1);
+      const resting = t < 0.6 || (blocked && t > 5.8);
       nodes.forEach((n, i) => {
-        n.classList.toggle('lit', !resting && i <= Math.min(reached, stop));
+        n.classList.toggle('lit', !resting && i <= reached);
         n.classList.toggle('blocked', !resting && blocked && i === GATE && reached >= GATE);
-        n.classList.toggle('sent', !resting && !blocked && i === nodes.length - 1 && reached >= stop);
         n.classList.toggle('dim', !resting && blocked && i > GATE && reached >= GATE);
+        n.classList.toggle('ready', !resting && !blocked && i === SENT && reached === SENT);
       });
-      say(resting ? rest : reached >= stop ? lines[blocked ? 1 : 0] : rest);
-    }, () => {});
+      heroFlow.classList.toggle('live', !resting);
+      let line = rest;
+      if (!resting && blocked && reached >= GATE) line = lines.blocked;
+      else if (!resting && !blocked && reached === SENT) line = lines.sent;
+      else if (!resting && !blocked && reached > SENT) line = lines.deal;
+      say(line, now);
+    };
+    if (reduced) {
+      render(total, true);
+    } else {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'flow-ctl';
+      heroFlow.querySelector('.flow-foot').prepend(btn);
+      // Starts 1.5s behind zero so the first run begins after the headline has been read.
+      let t = -1.5, last = 0, raf = 0, visible = false, paused = false;
+      const done = () => t >= total;
+      const label = () => {
+        btn.textContent = done() ? 'Replay' : paused ? 'Play' : 'Pause';
+        btn.setAttribute('aria-label', btn.textContent + ' the pipeline demo');
+      };
+      const running = () => visible && !paused && !done();
+      const tick = (now) => {
+        raf = 0;
+        if (!running()) return;
+        t = Math.min(total, t + Math.min(0.1, (now - last) / 1000));
+        last = now;
+        render(Math.max(0, t));
+        if (done()) label(); else raf = requestAnimationFrame(tick);
+      };
+      const go = () => {
+        if (running() && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+      };
+      btn.addEventListener('click', () => {
+        if (done()) { t = 0; paused = false; } else paused = !paused;
+        label();
+        go();
+      });
+      new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        go();
+      }, { threshold: 0.3 }).observe(heroFlow);
+      label();
+    }
   }
 
   // MCP batch: priced, confirmed, shots go ready. Then a batch over the cap is refused.
