@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T02:17:21Z",
+  "title": "Design System: Howard Tam",
+  "extensions": {
+    "colorMeta": {
+      "graphite":        { "role": "neutral", "displayName": "Graphite", "canonical": "#181818", "cssVar": "--bg", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "graphite-raised": { "role": "neutral", "displayName": "Graphite Raised", "canonical": "#1F1F1F", "cssVar": "--surface", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "graphite-lifted": { "role": "neutral", "displayName": "Graphite Lifted", "canonical": "#272727", "cssVar": "--surface-2", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "hairline":        { "role": "neutral", "displayName": "Hairline", "canonical": "#313131", "cssVar": "--line", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "chalk":           { "role": "primary", "displayName": "Chalk", "canonical": "#EDEDED", "cssVar": "--text", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "ash":             { "role": "neutral", "displayName": "Ash", "canonical": "#C8C8C8", "cssVar": "--text-2", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "smoke":           { "role": "neutral", "displayName": "Smoke", "canonical": "#9B9B9B", "cssVar": "--muted", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] },
+      "white":           { "role": "neutral", "displayName": "White", "canonical": "#FFFFFF", "cssVar": "--white", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#FFFFFF"] },
+      "ink":             { "role": "neutral", "displayName": "Ink", "canonical": "#000000", "cssVar": "--black", "tonalRamp": ["#000000", "#181818", "#1F1F1F", "#272727", "#313131", "#9B9B9B", "#C8C8C8", "#EDEDED"] }
+    },
+    "typographyMeta": {
+      "display":    { "displayName": "Display", "purpose": "Page H1 only; 48px on mobile, 60px from 768px; solid Chalk, balanced wrap." },
+      "headline":   { "displayName": "Headline", "purpose": "Stat figures (tabular numerals) and project names on the Projects page." },
+      "title":      { "displayName": "Title", "purpose": "Section H2s and work card titles." },
+      "lede":       { "displayName": "Lede", "purpose": "Intro paragraphs in Smoke; About paragraphs in Ash; max --measure (52ch, about 72 characters)." },
+      "body":       { "displayName": "Body", "purpose": "Prose in Ash, max --measure (52ch, about 72 characters)." },
+      "label":      { "displayName": "Label", "purpose": "Nav, form labels, more-links, pipeline nodes; 400 weight for captions and descriptions." },
+      "mono":       { "displayName": "Mono", "purpose": "Eyebrows, breadcrumb, timeline dates, terminal output." },
+      "mono-small": { "displayName": "Mono Small", "purpose": "Kickers, portrait captions, gate examples." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Movement: entrances, rises, transforms (--e)." },
+      { "name": "ease-cubic-out", "value": "cubic-bezier(0.33, 1, 0.68, 1)", "purpose": "Opacity and blur fades (--e2)." },
+      { "name": "ease-state", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Hover and state transitions (--ease)." },
+      { "name": "duration-state", "value": "300ms", "purpose": "Colour, border and background changes." },
+      { "name": "duration-media", "value": "500ms", "purpose": "Media zoom (1.03) and press scale (0.98)." },
+      { "name": "duration-reveal", "value": "700ms", "purpose": "Scroll reveal: rise 16px, unblur 4px." },
+      { "name": "duration-appear", "value": "800ms", "purpose": "Page entrance: rise 6px, unblur 2px, staggered 60ms." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "max-width: 480px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "desktop", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Inverted Chalk button; at most one per view (form submit, 404 home link).",
+      "html": "<button class=\"ds-btn-primary\">Send message</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; min-height: 44px; font: 600 16px/24px Geist, system-ui, sans-serif; color: var(--bg, #181818); background: var(--text, #EDEDED); border: 1px solid var(--text, #EDEDED); border-radius: 8px; padding: 8px 12px; cursor: pointer; transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background: var(--white, #FFFFFF); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid var(--white, #FFFFFF); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Link Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Hairline-bordered link button for contact rows and project links.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">LinkedIn</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; min-height: 44px; font: 600 16px/24px Geist, system-ui, sans-serif; color: var(--text, #EDEDED); text-decoration: none; border: 1px solid var(--line, #313131); border-radius: 8px; padding: 8px 12px; transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1), border-color 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-secondary:hover { background: var(--surface, #1F1F1F); border-color: var(--muted, #9B9B9B); } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--white, #FFFFFF); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact form field with label above; errors are a doubled Chalk edge plus a Mono-small Chalk message behind a status square, never red.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-name\">Name</label><input id=\"ds-name\" type=\"text\"><p class=\"ds-err\">Add your name.</p></div>",
+      "css": ".ds-field { display: grid; gap: 8px; max-width: 560px; font-family: Geist, system-ui, sans-serif; color: var(--text, #EDEDED); } .ds-field label { font-size: 14px; line-height: 20px; font-weight: 500; } .ds-field input { font: 400 16px/24px Geist, system-ui, sans-serif; color: var(--text, #EDEDED); background: var(--surface, #1F1F1F); border: 1px solid var(--line, #313131); border-radius: 8px; padding: 8px 12px; transition: border-color 300ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-field input:hover { border-color: var(--muted, #9B9B9B); } .ds-field input:focus-visible { outline: 2px solid var(--white, #FFFFFF); outline-offset: 2px; } .ds-err { display: flex; align-items: center; gap: 8px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; line-height: 16px; color: var(--text, #EDEDED); margin: 0; } .ds-err::before { content: \"\"; width: 6px; height: 6px; border-radius: 1px; background: var(--text, #EDEDED); }"
+    },
+    {
+      "name": "Floating Nav",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Translucent blurred pill bar; current section gets Graphite Lifted.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">Howard Tam</a><a href=\"#\" aria-current=\"true\">Work</a><a href=\"#\">Projects</a><a href=\"#\">About</a><a href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid var(--line, #313131); border-radius: 12px; background: color-mix(in srgb, var(--bg, #181818) 88%, transparent); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); font-family: Geist, system-ui, sans-serif; } .ds-nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--muted, #9B9B9B); text-decoration: none; padding: 8px 12px; border-radius: 8px; transition: color 300ms cubic-bezier(0.22, 1, 0.36, 1), background-color 300ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav a:hover { color: var(--text, #EDEDED); } .ds-nav a:focus-visible { outline: 2px solid var(--white, #FFFFFF); outline-offset: 2px; } .ds-nav a[aria-current] { color: var(--text, #EDEDED); background: var(--surface-2, #272727); } .ds-nav .ds-brand { color: var(--text, #EDEDED); font-weight: 600; }"
+    },
+    {
+      "name": "Interest Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Static tag on the About page; no selected state.",
+      "html": "<ul class=\"ds-chips\"><li>Guitar</li><li>Photography</li><li>Retro handhelds</li></ul>",
+      "css": ".ds-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; font-family: Geist, system-ui, sans-serif; } .ds-chips li { padding: 8px 12px; border: 1px solid var(--line, #313131); border-radius: 8px; background: var(--surface, #1F1F1F); color: var(--text, #EDEDED); font-size: 14px; line-height: 20px; }"
+    },
+    {
+      "name": "Work Card",
+      "kind": "card",
+      "refersTo": "card-work",
+      "description": "Case study row: title with arrow, Smoke description, hairline-framed 2:1 thumbnail (a legible crop, or the run's tally set in type); cards stack with 2px Hairline gaps.",
+      "html": "<ul class=\"ds-work\"><li><a href=\"#\"><span class=\"ds-txt\"><span class=\"ds-t\">Agentic outbound that won’t send anything untrue</span><span class=\"ds-d\">Four scheduled agents, two gates, a person on send.</span></span><span class=\"ds-thumb\"></span></a></li></ul>",
+      "css": ".ds-work { list-style: none; display: grid; gap: 2px; margin: 0; padding: 0; background: var(--line, #313131); border: 1px solid var(--line, #313131); border-radius: 12px; overflow: hidden; font-family: Geist, system-ui, sans-serif; } .ds-work a { display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: 24px; align-items: center; padding: 24px; background: var(--surface, #1F1F1F); color: var(--text, #EDEDED); text-decoration: none; transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-work a:hover { background: var(--surface-2, #272727); } .ds-work a:focus-visible { outline: 2px solid var(--white, #FFFFFF); outline-offset: -2px; } .ds-txt { display: grid; gap: 8px; } .ds-t { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; } .ds-t::after { content: \" →\"; color: var(--muted, #9B9B9B); } .ds-d { font-size: 14px; line-height: 20px; color: var(--muted, #9B9B9B); } .ds-thumb { display: block; aspect-ratio: 2 / 1; border-radius: 8px; border: 1px solid var(--line, #313131); background: var(--bg, #181818); }"
+    },
+    {
+      "name": "Pipeline Flow",
+      "kind": "custom",
+      "refersTo": "flow-node",
+      "description": "Signature mechanism diagram; states shown by luminance: lit, blocked (tagged on the draft), dimmed, and the inverted human node. On the home hero it has two labelled zones, The system and Me, the second a compact real deal path ending Chalk-filled at Live in production.",
+      "html": "<ol class=\"ds-flow\"><li class=\"lit\">Source</li><li class=\"lit\">Qualify<span>brief with URLs</span></li><li class=\"lit\">Draft<span>a source per claim</span></li><li class=\"blocked\">Draft gate<span>mechanical rules</span></li><li class=\"dim\">Account gate<span>CRM history</span></li><li class=\"human dim\">I send</li></ol>",
+      "css": ".ds-flow { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; font-family: Geist, system-ui, sans-serif; } .ds-flow li { display: grid; gap: 2px; padding: 8px 12px; border: 1px solid var(--line, #313131); border-radius: 8px; background: var(--surface, #1F1F1F); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text, #EDEDED); transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1), border-color 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-flow li span { font-size: 12px; line-height: 16px; font-weight: 400; color: var(--muted, #9B9B9B); } .ds-flow li:hover { border-color: var(--muted, #9B9B9B); } .ds-flow li.human { background: var(--text, #EDEDED); color: var(--bg, #181818); border-color: var(--text, #EDEDED); } .ds-flow li.lit { border-color: var(--muted, #9B9B9B); background: var(--surface-2, #272727); } .ds-flow li.blocked { border-color: var(--text, #EDEDED); background: var(--bg, #181818); position: relative; } .ds-flow li.blocked::after { content: \"draft stopped\"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 2px 6px; border-radius: 3px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; line-height: 16px; background: var(--text, #EDEDED); color: var(--bg, #181818); } .ds-flow li.dim { opacity: 0.35; }"
+    },
+    {
+      "name": "Terminal",
+      "kind": "custom",
+      "refersTo": "terminal",
+      "description": "Ink panel narrating a tool call: Chalk commands with a Smoke prompt, Smoke results, status squares that fill when ready.",
+      "html": "<figure class=\"ds-term\"><p class=\"ds-cmd\">submit_batch 6 shots, 7 s each</p><p class=\"ds-res\">estimate: 42 credits · draft held for 1 hour</p><p class=\"ds-cmd\">submit_batch confirm_credits: 42 <span class=\"ds-shots\"><i class=\"r\"></i><i class=\"r\"></i><i class=\"r\"></i><i></i><i></i><i></i></span></p><p class=\"ds-res\">submitted</p></figure>",
+      "css": ".ds-term { display: grid; gap: 8px; margin: 0; padding: 16px; border: 1px solid var(--line, #313131); border-radius: 12px; background: var(--black, #000000); font: 400 14px/20px 'Geist Mono', ui-monospace, monospace; color: var(--text-2, #C8C8C8); } .ds-term p { margin: 0; } .ds-cmd { color: var(--text, #EDEDED); } .ds-cmd::before { content: '› '; color: var(--muted, #9B9B9B); } .ds-res { color: var(--muted, #9B9B9B); padding-left: 16px; } .ds-shots { display: inline-flex; gap: 4px; vertical-align: middle; margin-left: 4px; } .ds-shots i { width: 10px; height: 10px; border-radius: 3px; border: 1px solid var(--muted, #9B9B9B); transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-shots i.r { background: var(--text, #EDEDED); border-color: var(--text, #EDEDED); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Instrument Panel",
+    "overview": "The site behaves like the systems it describes. A pipeline lights node by node, a gate stops a draft, a terminal prints a priced batch and then refuses one over the cap. Everything around those mechanisms is quiet chrome: graphite surfaces, hairline borders, grey type that brightens only where attention belongs. The visitor should feel they are looking at working equipment, not a brochure about it.\n\nDensity is moderate and editorial: one wide column (max 1200px) with generous vertical gaps (64px between home sections), readable measures (about 72 characters a line, --measure: 52ch) for prose, and numbers set large on hairlines rather than in boxes. Emphasis comes from brightness, not hue. Today the palette has no accent colour; that is the current state, not a permanent rule, and a single accent may be introduced later if it earns its place.\n\nMotion is functional storytelling, never decoration. Entrances are short blur-and-rise appearances; the live diagrams run on clocks that pause off screen; every effect has a still, complete fallback for reduced motion, no JavaScript, and print.",
+    "keyCharacteristics": [
+      "Monochrome graphite ladder, emphasis by luminance",
+      "Geist for everything, Geist Mono for metadata and machine output",
+      "Flat surfaces separated by hairlines; no shadows",
+      "Small, consistent radii (8px controls, 12px containers, 16px media)",
+      "Live mechanism diagrams as the signature element",
+      "Every animated state has a static equivalent"
+    ],
+    "rules": [
+      { "name": "The Luminance Rule", "body": "State is shown by brightness, borders, tags and motion: lit is Graphite Lifted with an Ash border, unreached steps drop to Smoke text while a draft runs, current is a Chalk border, blocked is a Chalk border on Graphite with an inverted mono tag (\"draft stopped\") on the draft rather than a strike through the gate, the human node lit means ready (\"draft ready\"), skipped steps dim to 35% opacity. The pinned case-study flow still pulses a White ring on its final step.", "section": "colors" },
+      { "name": "The Tokens-Only Rule", "body": "Colours live once in `:root` and are referenced by variable; no literal colour values in rules; translucency is mixed from a token (`color-mix`), never written as a raw `rgba()`.", "section": "colors" },
+      { "name": "The Machine Voice Rule", "body": "Geist Mono marks metadata and machine output only (dates, kickers, terminal, examples). Headings and prose never go mono.", "section": "typography" },
+      { "name": "The Flat Panel Rule", "body": "Surfaces never lift. Hover is a one-step tonal change or a 1.03 media zoom inside a clipped frame, never a shadow or a translate.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** express state through luminance, borders, tags, opacity and motion (see The Luminance Rule).",
+      "**Do** keep every interactive target at least 44px tall, extending text links with an invisible hit area rather than restyling them.",
+      "**Do** give every animation a still, complete end state for reduced motion, no JavaScript, and print.",
+      "**Do** run looping diagrams only while on screen, and label illustrations that are not real data.",
+      "**Do** set numbers in tabular figures on a top hairline, with their definition beneath in Smoke.",
+      "**Do** frame every image and video in a 1px Hairline border with the radius ladder (8 / 12 / 16px)."
+    ],
+    "donts": [
+      "**Don't** add box shadows, glows or lifted hover states; the system is flat.",
+      "**Don't** use colour to signal errors or success (no red, no green); errors are a doubled Chalk edge plus a Mono-small Chalk message.",
+      "**Don't** set headings or prose in Geist Mono; mono is for metadata and machine output.",
+      "**Don't** write literal colours in rules; add a token to `:root`.",
+      "**Don't** box the stat figures; they sit on hairlines.",
+      "**Don't** use more than one inverted Chalk button per view."
+    ]
+  }
+}
