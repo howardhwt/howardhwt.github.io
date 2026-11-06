@@ -107,7 +107,7 @@
       <p class="contact-note">I reply within two business days.</p>
       <p class="fit">Founding AE and GTM Engineer roles at early stage B2B and AI companies.</p>
       <ul class="reach" aria-label="Other ways to reach me">
-        <li><a id="mail" data-u="wh.mat.drawoh" data-d="moc.liamg">Email</a><span id="mail-addr"></span></li>
+        <li class="mail-row"><a id="mail" data-u="wh.mat.drawoh" data-d="moc.liamg">Email</a><span class="addr" id="mail-addr" role="status"></span><span class="sr" id="mail-said" role="status"></span></li>
         <li><a href="https://www.linkedin.com/in/howardhwt">LinkedIn</a><span>/in/howardhwt</span></li>
         <li><a href="https://github.com/howardhwt/outbound-gates">outbound-gates</a><span>the two gates, 50 tests</span></li>
       </ul>
@@ -145,7 +145,31 @@
     const rev = (v) => v.split('').reverse().join('');
     const addr = rev(m.dataset.u) + '@' + rev(m.dataset.d);
     m.href = 'mailto:' + addr;
-    document.getElementById('mail-addr').textContent = addr;
+    // A tiny reveal: the address shows (spelled out) only after a click, then the same button copies the real one.
+    const line = document.getElementById('mail-addr');
+    const said = document.getElementById('mail-said');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'addr-btn';
+    btn.textContent = 'show address';
+    line.before(btn);
+    let reset = 0;
+    const tell = (msg) => {
+      btn.textContent = msg;
+      said.textContent = msg;
+      clearTimeout(reset);
+      reset = setTimeout(() => { btn.textContent = 'copy'; said.textContent = ''; }, 2000);
+    };
+    btn.addEventListener('click', () => {
+      if (!line.textContent) {
+        line.textContent = addr.replace('@', ' at ').replace(/\./g, ' dot ');
+        btn.textContent = 'copy';
+        return;
+      }
+      const blocked = () => tell('copy blocked, use Email');
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(() => tell('copied'), blocked);
+      else blocked();
+    });
     const f = document.getElementById('contact');
     const status = document.getElementById('f-status');
     const checks = [

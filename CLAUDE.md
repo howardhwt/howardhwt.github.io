@@ -48,7 +48,7 @@ Every effect must degrade: under `prefers-reduced-motion` stories call their `re
 ## Home page specifics
 
 - The contact form posts to Web3Forms (`access_key` hidden input) with inline client-side validation; a hidden `botcheck` checkbox is the honeypot.
-- The email link (`#mail`, in the `.reach` channel rows) is obfuscated: `data-u`/`data-d` hold reversed strings that a small inline script assembles into a `mailto:`. Keep it that way rather than writing the address in plain text.
+- The email link (`#mail`, in the `.reach` channel rows) is obfuscated: `data-u`/`data-d` hold reversed strings that a small inline script assembles into a `mailto:`. The same script adds the "show address" reveal/copy tag to that row (it shows the address spelled out and copies the real one). Keep it that way rather than writing the address in plain text.
 
 ## Content conventions
 
