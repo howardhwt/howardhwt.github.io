@@ -339,7 +339,8 @@ h2 {
 /* What I want to hear about, in the machine voice. */
 .fit { max-width: 400px; margin-bottom: 24px; font-family: var(--mono); font-size: 14px; line-height: 20px; color: var(--text); }
 /* Direct channels as instrument rows: name left, what it is right. */
-.reach { list-style: none; margin: 32px 0 0; padding: 0; border-bottom: 1px solid var(--line); }
+/* On phones the rows come before the form, so a visitor can tap before typing. */
+.reach { list-style: none; margin: 0 0 32px; padding: 0; border-bottom: 1px solid var(--line); }
 .reach li { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; border-top: 1px solid var(--line); }
 .reach a { color: var(--text); font-weight: 500; text-decoration: none; text-underline-offset: 4px; }
 .reach a:hover { text-decoration: underline; }
@@ -595,7 +596,7 @@ h2 {
   .contact h2 { grid-column: 1; grid-row: 1; }
   .contact-note { grid-column: 1; grid-row: 2; max-width: 400px; margin: 0; }
   .contact .fit { grid-column: 1; grid-row: 3; margin: 16px 0 0; }
-  .contact .reach { grid-column: 1; grid-row: 4; max-width: 400px; }
+  .contact .reach { grid-column: 1; grid-row: 4; max-width: 400px; margin: 32px 0 0; }
   .contact form { grid-column: 2; grid-row: 1 / span 4; }
   .proj article { grid-template-columns: 7fr 5fr; gap: 48px; }
   .proj article:nth-child(even) .media { order: 2; }
@@ -609,8 +610,10 @@ h2 {
 }
 @media (min-width: 1100px) {
   /* The pipeline is the page's proof: a real column beside the claim, not a sidebar widget. */
-  /* Top-aligned: the claim starts at the top of the screen instead of floating against the tall figure. */
+  /* The figure starts at the top of the screen; the claim is centred beside it (below). */
   .hero-row { grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; align-items: start; }
+  /* The claim sits centred against the figure, so the space beside it is shared above and below, not left as one band under the buttons. */
+  .hero-row .hero { align-self: center; }
   main.wrap { padding-top: 128px; }
   .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 }
