@@ -16,6 +16,12 @@ python3 -m http.server 8000   # then open http://localhost:8000/
 
 Deploying is just pushing to `master`.
 
+Every page links `/style.css?v=<hash>` and `/motion.js?v=<hash>` (first 8 hex of the file's SHA-1) so a deploy can't serve new HTML with a cached old stylesheet. After editing either file, bump the versions in all pages:
+
+```sh
+for f in style.css motion.js; do h=$(shasum "$f" | cut -c1-8); grep -rl --include='*.html' "/$f" . | xargs sed -i '' -E "s#\"/$f(\?v=[0-9a-f]+)?\"#\"/$f?v=$h\"#g"; done
+```
+
 ## Structure
 
 - Each page is a standalone `index.html` in its own directory (`/`, `work/`, `work/<case-study>/`, `projects/`, `about/`, plus `404.html`). There are no templates or includes: the `<head>` (fonts, OG/Twitter meta, canonical, icons), the `<nav class="nav">` and the GoatCounter script are copied into every page. A nav or head change has to be made in every HTML file.
