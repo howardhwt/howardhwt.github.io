@@ -130,6 +130,8 @@
         n.classList.toggle('blocked', !resting && blocked && i === GATE && reached >= GATE);
         n.classList.toggle('dim', !resting && blocked && i > GATE && reached >= GATE);
         n.classList.toggle('ready', !resting && !blocked && i === SENT && reached === SENT);
+        // Once the first draft has been stopped, the gate keeps a record of it to the end.
+        n.classList.toggle('stopped', i === GATE && (!blocked || (resting && t > HOLD)));
       });
       heroFlow.classList.toggle('live', !resting);
       let line = rest;
@@ -169,10 +171,14 @@
         label();
         go();
       });
+      // Runs only while most of the figure is on screen, so on phones the story starts once it can be seen.
+      // (or most of what fits, when the figure is taller than the screen).
       new IntersectionObserver((entries) => {
-        visible = entries[0].isIntersecting;
+        const e = entries[0];
+        const need = Math.min(0.7, (0.8 * innerHeight) / e.boundingClientRect.height);
+        visible = e.isIntersecting && e.intersectionRatio >= need;
         go();
-      }, { threshold: 0.3 }).observe(heroFlow);
+      }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7] }).observe(heroFlow);
       label();
     }
   }
