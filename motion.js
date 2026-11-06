@@ -103,7 +103,7 @@
     const lines = {
       blocked: 'Blocked at the draft gate: a number with no source behind it.',
       sent: 'A sourced draft clears both gates. I send it.',
-      deal: 'From the reply on, the deal is mine: a discovery call, an API trial, pricing, signed, live in production.',
+      deal: 'The system got the email past both gates. I took the deal from reply to production.',
     };
     let shown = rest;
     const say = (text, now) => {
@@ -113,16 +113,18 @@
       cap.classList.add('swap');
       setTimeout(() => { cap.textContent = text; cap.classList.remove('swap'); }, 300);
     };
-    // When each node lights: the system at a machine pace, a beat on the hand-off, then the deal.
-    const at = nodes.map((_, i) => (i <= SENT ? 0.6 + i * 0.45 : 0.6 + SENT * 0.45 + 1.4 + (i - SENT - 1) * 0.6));
-    const BLOCK_RUN = 7;                   // first run: blocked, then back to rest
+    // When each node lights: the system at a machine pace, a beat on the hand-off, then the
+    // deal at a slower, heavier pace. The first run holds on the stop, then resets briefly.
+    const START = 0.2, SYS = 0.35, HANDOFF = 0.9, DEAL = 0.75;
+    const at = nodes.map((_, i) => (i <= SENT ? START + i * SYS : START + SENT * SYS + HANDOFF + (i - SENT - 1) * DEAL));
+    const HOLD = 3.6, BLOCK_RUN = 3.8;     // first run: blocked, held, then a short reset
     const total = BLOCK_RUN + at[LAST] + 0.4; // second run ends on the live deal
     const render = (time, now) => {
       const blocked = time < BLOCK_RUN;
       const t = blocked ? time : time - BLOCK_RUN;
       const stop = blocked ? GATE : LAST;
       const reached = Math.min(stop, at.filter((a) => a <= t).length - 1);
-      const resting = t < 0.6 || (blocked && t > 5.8);
+      const resting = t < START || (blocked && t > HOLD);
       nodes.forEach((n, i) => {
         n.classList.toggle('lit', !resting && i <= reached);
         n.classList.toggle('blocked', !resting && blocked && i === GATE && reached >= GATE);

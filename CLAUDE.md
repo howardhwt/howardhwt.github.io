@@ -39,7 +39,7 @@ One IIFE loaded with `defer` on every page. It sets `window.siteMotion` and adds
 - `.reveal` – fades in once when scrolled into view.
 - `.facts dt` – numbers count up once, then land on the exact original text.
 - `.term` (Viggle Console terminal) – a looping "story" driven by `story(root, period, draw, rest)`, a clock that only advances while the element is on screen.
-- `.hero-flow` (home hero) – its own finite clock over two lists (`.flow.sys`, `.flow.mine`): a draft blocked at the draft gate, then one that clears, is sent, and lights one real anonymised deal through to "Live in production", where it stops. Starts 1.5s after it comes on screen and runs only while visible; a generated Pause/Play/Replay button goes into `.flow-foot`. Reduced motion renders the finished deal. (`.me` is taken by the About teaser; don't reuse it.)
+- `.hero-flow` (home hero) – its own finite clock over two lists (`.flow.sys`, `.flow.mine`): a draft blocked at the draft gate, then one that clears, is sent, and lights one real anonymised deal through to "Live in production", where it stops. Starts 1.5s after it comes on screen and runs only while visible; a generated Pause/Play/Replay button goes into `.flow-foot`. Timing lives in the `START`/`SYS`/`HANDOFF`/`DEAL`/`HOLD`/`BLOCK_RUN` constants. Reduced motion renders the finished deal. (`.me` is taken by the About teaser; don't reuse it.)
 - `.pin-steps li` + `.pin .flow li` – the pinned pipeline on the outbound case study; the step in the middle of the viewport lights its node.
 - `video[muted]` – plays only while visible.
 
