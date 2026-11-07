@@ -341,15 +341,15 @@ h2 {
 /* Direct channels as instrument rows: name left, what it is right. */
 /* On phones the rows come before the form, so a visitor can tap before typing. */
 .reach { list-style: none; margin: 0 0 32px; padding: 0; border-bottom: 1px solid var(--line); }
-.reach li { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; border-top: 1px solid var(--line); }
-.reach a { color: var(--text); font-weight: 500; text-decoration: none; text-underline-offset: 4px; }
+.reach li { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 6px 0; border-top: 1px solid var(--line); }
+.reach a { color: var(--text); font-weight: 500; text-decoration: none; text-underline-offset: 4px; white-space: nowrap; }
 .reach a:hover { text-decoration: underline; }
 .reach a:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
-.reach span { font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); }
+.reach span { font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); text-align: right; text-wrap: balance; }
 /* Email row: a tiny reveal tag (added by script), then the spelled-out address on its own line. */
 .reach .mail-row { flex-wrap: wrap; align-content: center; row-gap: 0; }
-.reach .addr { flex-basis: 100%; color: var(--text-2); }
-.reach .addr:not(:empty) { margin-top: 4px; padding-bottom: 12px; }
+.reach .addr { flex-basis: 100%; color: var(--text-2); text-align: left; }
+.reach .addr:not(:empty) { margin-top: 4px; padding-bottom: 6px; }
 .reach .addr-btn {
   position: relative;
   display: inline-block;
