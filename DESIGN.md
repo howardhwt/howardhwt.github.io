@@ -50,7 +50,6 @@ typography:
     fontSize: "14px"
     fontWeight: 400
     lineHeight: "20px"
-    letterSpacing: "0.02em"
   mono-small:
     fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "12px"
@@ -193,7 +192,7 @@ A single neutral ladder from near-black to white; brightness carries hierarchy a
 - **Lede** (400, 18px/28px): intro paragraphs in Smoke, About paragraphs in Ash, max `--measure` (52ch, about 72 characters), pretty wrap.
 - **Body** (400, 16px/24px): prose in Ash, max `--measure` (52ch, about 72 characters).
 - **Label** (500, 14px/20px): nav, form labels, "more" links, pipeline nodes, captions and descriptions (400).
-- **Mono** (400, 14px/20px, 0.02em): eyebrows, breadcrumb, timeline dates, terminal. **Mono small** (12px/16px): kickers, portrait captions, gate examples.
+- **Mono** (400, 14px/20px): eyebrows, breadcrumb, timeline dates, terminal. **Mono small** (12px/16px): kickers, portrait captions, gate examples.
 
 ### Named Rules
 **The Machine Voice Rule.** Geist Mono marks metadata and machine output only (dates, kickers, terminal, examples). Headings and prose never go mono.
@@ -202,7 +201,7 @@ A single neutral ladder from near-black to white; brightness carries hierarchy a
 
 A single centred container (max 1200px, 24px side padding) holding a vertical grid of sections: 64px apart on home, 48px on case studies. Main content starts 128px from the top (160px from 768px, back to 128px from 1100px where the pipeline starts at the top) to clear the floating nav.
 
-Prose is capped at `--measure` (52ch; Geist sets about 1.4 characters per ch, so this is about 72 characters a line). Grids use `auto-fit` with minimums (240px for figures, 260px for tiles) so they reflow without breakpoints. Breakpoints: 480px (nav collapses brand to "HT"), 768px (larger display, work cards gain a 240px thumbnail column, About teaser goes two-column), 900px (figures sit in one row however many there are, contact goes two-column, Projects alternate 7fr/5fr, About goes 4fr/7fr with a sticky portrait, pinned pipeline gets a 220px sticky column), 1100px (hero gains a 400px pipeline column that starts at the top, with the claim centred beside it; home project rows go three across).
+Prose is capped at `--measure` (52ch; Geist sets about 1.4 characters per ch, so this is about 72 characters a line). Grids are explicit and step at breakpoints: figures sit two to a row until 900px, then one row; home project rows stack until 1100px, then go three across. Breakpoints: 480px (nav collapses brand to "HT", figures drop to 24px), below 768px (the hero's system zone wraps into a row), 768px (larger display, work cards gain a 240px thumbnail column, About teaser goes two-column), 900px (figures sit in one row however many there are, contact goes two-column, Projects alternate 7fr/5fr, About goes 4fr/7fr with a sticky portrait, pinned pipeline gets a 220px sticky column), 1100px (hero gains a 400px pipeline column that starts at the top, with the claim centred beside it; home project rows go three across).
 
 Spacing steps on a 4px base: 4, 8, 12, 16, 24, 32, 48, 64. Lists of rows (timeline, writing, pipeline steps) separate with top hairlines, not gaps.
 
@@ -215,7 +214,7 @@ Flat. No box shadows anywhere. Depth comes from tonal layering (Graphite → Gra
 
 ## Shapes
 
-Gently rounded rectangles in a tight ladder: 3px for the tiny status squares in the terminal, 8px for every control (buttons, inputs, nav links, chips, nodes, notes), 12px for containers (nav bar, work card group, terminal, artifact images), 16px for large media and the portrait. Every container and image carries a 1px Hairline border. Media is cropped with `object-fit: cover` inside fixed aspect ratios (4:3 tiles and thumbnails, 4:5 portraits).
+Gently rounded rectangles in a tight ladder: 3px for the small mono tags (pipeline tags, the "show address" tag) and the tiny status squares in the terminal, 8px for every control (buttons, inputs, nav links, chips, nodes, notes), 12px for containers (nav bar, work card group, terminal, artifact images), 16px for large media and the portrait. Every container and image carries a 1px Hairline border. Media is cropped with `object-fit: cover` inside fixed aspect ratios (4:3 tiles and thumbnails, 4:5 portraits).
 
 ## Components
 
@@ -225,7 +224,7 @@ Precise and restrained: flat fills, hairline edges, small radii; feedback is a t
 - **Shape:** gently rounded (8px), minimum 44px tall.
 - **Primary:** Chalk fill, Graphite text, semibold, 8px 12px padding. One per view at most (the form submit, the 404's "Go to home page").
 - **Hover / Focus:** hover brightens to White; press scales to 0.98; focus is a 2px White outline offset 2px.
-- **Secondary:** transparent with a Hairline border and Chalk text; hover fills Graphite Raised and the border brightens to Smoke. Used for the contact link row and project links.
+- **Secondary:** transparent with a Hairline border and Chalk text; hover fills Graphite Raised and the border brightens to Smoke. Used for project links and the closing link rows on case studies, About and the 404.
 - **Text links:** "more" and jump links are Chalk with a Hairline underline border that turns Chalk on hover; an invisible 44px hit area extends them without changing their look. In-text links underline at 4px offset and go Ash once visited. The hero ask ("Get in touch") is the exception: a 44px bordered link (Hairline border, 8px radius, Graphite-raised on hover) beside the plain "Read the case studies" link, so it reads as the next step.
 
 ### Chips
@@ -251,7 +250,7 @@ Precise and restrained: flat fills, hairline edges, small radii; feedback is a t
 Under the availability line, two Mono 14/20 Chalk lines put evidence in the first screen: what closed ("~$47K closed at Viggle") and what it led to ("30+ API opportunities originated, 2 live in production"); deliberately not a deal count that could be divided against the revenue. Stacked, no separators, so they never wrap mid-pair.
 
 ### Pipeline Flow (signature)
-The home hero is one column of two labelled zones in Mono small Smoke: "The system" (Source, Qualify, Draft, Draft gate, Account gate as compact 14px 8px-radius rows, sub-label on the right in Mono-small Smoke) and "Me" (I send, Reply, Discovery call, API trial, Pricing, Signed, Live in production as full 16px rows). Seller first: the deal zone is the heavier half and lights at a slower pace (0.75s a step against 0.35s for the system). The Me zone is one real Viggle deal, anonymised: no name, amount or dates. Hairline connectors join the rows and light Ash as a draft passes. The story runs twice and ends: first a draft is blocked (the draft gate gets an inverted "draft stopped" tag, later nodes dim); after a 0.4s reset, a draft clears both gates, the human node fills Chalk with a "draft ready" tag for that beat only (it returns to an outline once the deal moves on), and the deal lights row by row to "Live in production", the only Chalk-filled row at the end, which holds. Once the first draft is stopped, the draft gate keeps an outlined, Smoke "1 stopped" tag to the end, so the finished frame (and the reduced-motion view) still records the stop. The whole story runs about 11s. While a run plays, unreached rows drop to Smoke text. A 16px Ash caption crossfades to narrate each phase; beneath it a Pause/Play/Replay text button and a Mono-small "Illustration · real deal path, anonymised" label. The first run waits 1.5s, and the clock runs only while about 70% of the figure (or 80% of the screen height, if the figure is taller) is visible, so on phones it starts when scrolled to. Reduced motion shows the finished deal. Hover does not pause it. From 1100px it takes a 400px column beside the claim; below that it stacks under the text, and below 768px the system zone wraps into a row of small chips without sub-labels or connectors (tags sit inline) so the figure stays under about 480px. On the case study the system flow is pinned beside scrolling steps, and the step in the middle of the viewport lights its node; its final step still pulses a White ring.
+The home hero is one column of two labelled zones in Mono small Smoke: "The system" (Source, Qualify, Draft, Draft gate, Account gate as compact 14px 8px-radius rows, sub-label on the right in 12px Smoke) and "Me" (I send, Reply, Discovery call, API trial, Pricing, Signed, Live in production as full 16px rows). Seller first: the deal zone is the heavier half and lights at a slower pace (0.75s a step against 0.35s for the system). The Me zone is one real Viggle deal, anonymised: no name, amount or dates. Hairline connectors join the rows and light Ash as a draft passes. The story runs twice and ends: first a draft is blocked (the draft gate gets an inverted "draft stopped" tag, later nodes dim); after a 0.4s reset, a draft clears both gates, the human node fills Chalk with a "draft ready" tag for that beat only (it returns to an outline once the deal moves on), and the deal lights row by row to "Live in production", the only Chalk-filled row at the end, which holds. Once the first draft is stopped, the draft gate keeps an outlined, Smoke "1 stopped" tag to the end, so the finished frame (and the reduced-motion view) still records the stop. The whole story runs about 11s. While a run plays, unreached rows drop to Smoke text. A 16px Ash caption crossfades to narrate each phase; beneath it a Pause/Play/Replay text button and a Mono-small "Illustration · real deal path, anonymised" label. The first run waits 1.5s, and the clock runs only while about 70% of the figure (or 80% of the screen height, if the figure is taller) is visible, so on phones it starts when scrolled to. Reduced motion shows the finished deal. Hover does not pause it. From 1100px it takes a 400px column beside the claim; below that it stacks under the text, and below 768px the system zone wraps into a row of small chips without sub-labels or connectors (tags sit inline) so the figure stays under about 480px. On the case study the system flow is pinned beside scrolling steps, and the step in the middle of the viewport lights its node; its final step still pulses a White ring.
 
 ### Terminal (signature)
 An Ink panel, 12px radius, Hairline border, Geist Mono 14/20. Commands in Chalk prefixed with a Smoke "›", results indented in Smoke. Lines rise and unblur in sequence; small 10px status squares fill Chalk as shots go ready. Alternates an accepted run with a refused one, and carries a caption saying it is an illustration.
