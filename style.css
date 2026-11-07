@@ -326,7 +326,7 @@ h2 {
 .tile .d { align-self: start; font-size: 14px; line-height: 20px; color: var(--muted); }
 
 .me { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; }
-.me img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; }
+.me img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
 .me p { color: var(--text-2); text-wrap: pretty; max-width: var(--measure); }
 
 /* ---------- Contact form ---------- */
@@ -529,7 +529,7 @@ h2 {
 .about h2 { font-size: 20px; line-height: 28px; font-weight: 600; color: var(--text); margin: 64px 0 16px; }
 .about h2:first-of-type { margin-top: 48px; }
 .about .next { margin-top: 48px; }
-.portrait img { width: 100%; max-width: 420px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; display: block; }
+.portrait img { width: 100%; max-width: 420px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; border: 1px solid var(--line); display: block; }
 .portrait img.photo-in { animation: photo-in 1.2s var(--e2) both; }
 .portrait figcaption { margin-top: 12px; font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); }
 .timeline { list-style: none; display: grid; }
